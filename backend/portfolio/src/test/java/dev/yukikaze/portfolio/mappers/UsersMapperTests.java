@@ -26,10 +26,10 @@ public class UsersMapperTests {
     private UsersMapper usersMapper;
 
     /**
-     * 全件取得のテスト
+     * findAll メソッドのテスト
      */
     @Test
-    public void findAllTest() {
+    public void findAll() {
         // データの取得
         List<UsersEntity> usersList = this.usersMapper.findAll();
 
