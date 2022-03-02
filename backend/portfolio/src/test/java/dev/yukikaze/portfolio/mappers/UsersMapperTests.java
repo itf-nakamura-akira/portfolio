@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.test.context.ActiveProfiles;
 
 import dev.yukikaze.portfolio.entities.UsersEntity;
+import dev.yukikaze.portfolio.enums.UsersPermission;
 
 /**
  * UsersMapper のテストコード
@@ -49,5 +50,78 @@ public class UsersMapperTests {
         assertThat(usersList.get(9).getAccount()).isEqualTo("yahata");
         assertThat(usersList.get(10).getAccount()).isEqualTo("ichinohe");
         assertThat(usersList.get(11).getAccount()).isEqualTo("referencer");
+    }
+
+    /**
+     * findById メソッドのテスト
+     */
+    @Test
+    public void findById() {
+        // 「管理者ユーザー」のデータの取得
+        UsersEntity adminUser = this.usersMapper.findById(1L);
+
+        // データの確認
+        assertThat(adminUser.getId()).isEqualTo(1L);
+        assertThat(adminUser.getAccount()).isEqualTo("admin");
+        assertThat(adminUser.getPasswordHash()).isEqualTo("$2a$10$NHwSXeZd7ieiIKKGsOqcteNdZoND9VfQqkB9yIdUnNh4Dq48DTv7q");
+        assertThat(adminUser.getName()).isEqualTo("管理者ユーザー");
+        assertThat(adminUser.getPermission()).isEqualTo(UsersPermission.Admin);
+        assertThat(adminUser.getIsEnabled()).isEqualTo(true);
+        
+        // 「齋藤 綾香」のデータの取得
+        UsersEntity ichinoheUser = this.usersMapper.findById(11L);
+
+        // データの確認
+        assertThat(ichinoheUser.getId()).isEqualTo(11L);
+        assertThat(ichinoheUser.getAccount()).isEqualTo("ichinohe");
+        assertThat(ichinoheUser.getPasswordHash()).isEqualTo("$2a$10$VcUwVqjSMnJxF.ColcRQEe4E1iUAwlSc8tmlcU2mV/50nt6xF2eUC");
+        assertThat(ichinoheUser.getName()).isEqualTo("一戸 敏雄");
+        assertThat(ichinoheUser.getPermission()).isEqualTo(UsersPermission.User);
+        assertThat(ichinoheUser.getIsEnabled()).isEqualTo(false);
+        
+        // 「参照ユーザー」のデータの取得
+        UsersEntity referencerUser = this.usersMapper.findById(12L);
+
+        // データの確認
+        assertThat(referencerUser.getId()).isEqualTo(12L);
+        assertThat(referencerUser.getAccount()).isEqualTo("referencer");
+        assertThat(referencerUser.getPasswordHash()).isEqualTo("$2a$10$Nwig050LweltGBInbomL/ePMZ1Ofspepa.n7dnBJpQTBWDFtl/THO");
+        assertThat(referencerUser.getName()).isEqualTo("参照ユーザー");
+        assertThat(referencerUser.getPermission()).isEqualTo(UsersPermission.Referencer);
+        assertThat(referencerUser.getIsEnabled()).isEqualTo(true);
+    }
+
+    /**
+     * insertUser メソッドのテスト
+     */
+    @Test
+    public void insertUser() {
+        // INSERTするusersデータ
+        var addUser = new UsersEntity();
+        addUser.setAccount("test-user");
+        addUser.setPasswordHash("パスワードハッシュ");
+        addUser.setName("テストユーザー");
+        addUser.setPermission(UsersPermission.Admin);
+        addUser.setIsEnabled(true);
+
+        // データの挿入
+        Integer addedCount = this.usersMapper.insertUser(addUser);
+
+        // 挿入された件数が1件
+        assertThat(addedCount).isEqualTo(1);
+
+        // IDが自動的に割り振られている
+        assertThat(addUser.getId()).isNotEqualTo(null);
+
+        // DBから挿入したデータを取得する
+        UsersEntity addedUser = this.usersMapper.findById(addUser.getId());
+
+        // データの確認
+        assertThat(addUser.getId()).isEqualTo(addedUser.getId());
+        assertThat(addUser.getAccount()).isEqualTo(addedUser.getAccount());
+        assertThat(addUser.getPasswordHash()).isEqualTo(addedUser.getPasswordHash());
+        assertThat(addUser.getName()).isEqualTo(addedUser.getName());
+        assertThat(addUser.getPermission()).isEqualTo(addedUser.getPermission());
+        assertThat(addUser.getIsEnabled()).isEqualTo(addedUser.getIsEnabled());
     }
 }
