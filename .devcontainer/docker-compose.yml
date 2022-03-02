@@ -1,0 +1,31 @@
+version: '3'
+services:
+    portfolio:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: portfolio
+        command: sleep infinity
+        restart: always
+        ports:
+            - '52425:4200' # Angular
+            - '52428:8080' # Java
+        volumes:
+            - ../:/workspace
+        env_file: ./environment.env
+        depends_on:
+            - portfolio-db
+    portfolio-db:
+        image: mariadb:10.7.1
+        container_name: portfolio-db
+        restart: always
+        env_file: ./environment.env
+        volumes:
+            - portfolio-db-volume:/var/lib/mariadb/
+            - ../database/mariadb.cnf:/etc/mysql/mariadb.cnf
+            - ../database/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+        ports:
+            - '52420:3306' # MariaDB
+volumes:
+    portfolio-db-volume:
+        driver: local

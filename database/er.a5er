@@ -1,0 +1,65 @@
+﻿# A5:ER FORMAT:16
+# A5:ER ENCODING:UTF8
+# A5:ER Mk-1 Copyright © 2007 m.matsubara
+# A5:SQL Mk-2 Version 2.17.1 Copyright © 1997 - 2022 m.matsubara
+#  https://a5m2.mmatsubara.com
+
+[Manager]
+ProjectName=Portfolio
+Author=Akira Nakamura - ITFLLC
+MaxEntityRowShow=1000
+ReadOnlyRecommend=0
+Page=Portfolio
+PageInfo="Portfolio",7,"A3Landscape",$FFFFFF
+LogicalView=1
+DecodeDomain=0
+ViewModePageIndividually=1
+ViewMode=7
+ViewFormat=0
+UseNondependenceDashLine=0
+FontName=Tahoma
+FontSize=9
+PaperSize=A4Landscape
+HeaderLeft=
+HeaderCenter=
+HeaderRight=
+FooterLeft=
+FooterCenter=
+FooterRight=
+ShowPageoutRelation=1
+RDBMSType=5
+RDBMSTypeName=MySQL
+BackupRestoreTempTable=0
+CreateFk=1
+FkOnDeleteOption=on delete no action
+FkOnUpdateOption=on update no action
+DefaultPkName=%0:s_PKC
+DefaultPkIndexName=%0:s_PKI
+DefaultIndexName=%0:s_IX%1:d
+DefaultFkName=%0:s_FK%1:d
+SqlSeparator=0
+UpperCaseKeyword=0
+ShowTag=1
+ShowCommonAttributes=0
+BugFixEntityWidth=1
+
+[Entity]
+PName=users
+LName=ユーザー
+Comment=
+TableOption=
+Page=Portfolio
+Left=500
+Top=250
+Field="ID","id","serial","NOT NULL",0,"","",$FFFFFFFF,""
+Field="アカウント","account","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="パスワードハッシュ","password_hash","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="表示名","name","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="ユーザー権限","permission","enum(\qAdmin\q, \qUser\q, \qReferencer\q)","NOT NULL",,"","Referencerは許可されたユーザーのデータを参照できるユーザー",$FFFFFFFF,""
+Field="有効フラグ","is_enabled","boolean","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20220302205233
+Position="Portfolio",500,250
+ZOrder=1
