@@ -1,9 +1,8 @@
 package dev.yukikaze.portfolio.mappers;
 
 import java.util.List;
-
+import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
-
 import dev.yukikaze.portfolio.entities.UsersEntity;
 
 /**
@@ -25,7 +24,7 @@ public interface UsersMapper {
      * 
      * @return 指定した1件のデータ
      */
-    public UsersEntity findById(Long id);
+    public Optional<UsersEntity> findById(Long id);
 
     /**
      * ユーザーの追加

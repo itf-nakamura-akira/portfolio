@@ -1,15 +1,13 @@
 package dev.yukikaze.portfolio.mappers;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 import java.util.List;
-
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.test.context.ActiveProfiles;
-
 import dev.yukikaze.portfolio.entities.UsersEntity;
 import dev.yukikaze.portfolio.enums.UsersPermission;
 
@@ -58,37 +56,46 @@ public class UsersMapperTests {
     @Test
     public void findById() {
         // 「管理者ユーザー」のデータの取得
-        UsersEntity adminUser = this.usersMapper.findById(1L);
+        UsersEntity adminUser = this.usersMapper.findById(1L).get();
 
         // データの確認
         assertThat(adminUser.getId()).isEqualTo(1L);
         assertThat(adminUser.getAccount()).isEqualTo("admin");
-        assertThat(adminUser.getPasswordHash()).isEqualTo("$2a$10$NHwSXeZd7ieiIKKGsOqcteNdZoND9VfQqkB9yIdUnNh4Dq48DTv7q");
+        assertThat(adminUser.getPasswordHash())
+                .isEqualTo("$2a$10$NHwSXeZd7ieiIKKGsOqcteNdZoND9VfQqkB9yIdUnNh4Dq48DTv7q");
         assertThat(adminUser.getName()).isEqualTo("管理者ユーザー");
         assertThat(adminUser.getPermission()).isEqualTo(UsersPermission.Admin);
         assertThat(adminUser.getIsEnabled()).isEqualTo(true);
-        
+
         // 「齋藤 綾香」のデータの取得
-        UsersEntity ichinoheUser = this.usersMapper.findById(11L);
+        UsersEntity ichinoheUser = this.usersMapper.findById(11L).get();
 
         // データの確認
         assertThat(ichinoheUser.getId()).isEqualTo(11L);
         assertThat(ichinoheUser.getAccount()).isEqualTo("ichinohe");
-        assertThat(ichinoheUser.getPasswordHash()).isEqualTo("$2a$10$VcUwVqjSMnJxF.ColcRQEe4E1iUAwlSc8tmlcU2mV/50nt6xF2eUC");
+        assertThat(ichinoheUser.getPasswordHash())
+                .isEqualTo("$2a$10$VcUwVqjSMnJxF.ColcRQEe4E1iUAwlSc8tmlcU2mV/50nt6xF2eUC");
         assertThat(ichinoheUser.getName()).isEqualTo("一戸 敏雄");
         assertThat(ichinoheUser.getPermission()).isEqualTo(UsersPermission.User);
         assertThat(ichinoheUser.getIsEnabled()).isEqualTo(false);
-        
+
         // 「参照ユーザー」のデータの取得
-        UsersEntity referencerUser = this.usersMapper.findById(12L);
+        UsersEntity referencerUser = this.usersMapper.findById(12L).get();
 
         // データの確認
         assertThat(referencerUser.getId()).isEqualTo(12L);
         assertThat(referencerUser.getAccount()).isEqualTo("referencer");
-        assertThat(referencerUser.getPasswordHash()).isEqualTo("$2a$10$Nwig050LweltGBInbomL/ePMZ1Ofspepa.n7dnBJpQTBWDFtl/THO");
+        assertThat(referencerUser.getPasswordHash())
+                .isEqualTo("$2a$10$Nwig050LweltGBInbomL/ePMZ1Ofspepa.n7dnBJpQTBWDFtl/THO");
         assertThat(referencerUser.getName()).isEqualTo("参照ユーザー");
         assertThat(referencerUser.getPermission()).isEqualTo(UsersPermission.Referencer);
         assertThat(referencerUser.getIsEnabled()).isEqualTo(true);
+
+        // 存在しないユーザーの取得
+        Optional<UsersEntity> notExistsUser = this.usersMapper.findById(-1L);
+
+        // データの確認
+        assertThat(notExistsUser).isEmpty();
     }
 
     /**
@@ -114,7 +121,7 @@ public class UsersMapperTests {
         assertThat(addUser.getId()).isNotEqualTo(null);
 
         // DBから挿入したデータを取得する
-        UsersEntity addedUser = this.usersMapper.findById(addUser.getId());
+        UsersEntity addedUser = this.usersMapper.findById(addUser.getId()).get();
 
         // データの確認
         assertThat(addUser.getId()).isEqualTo(addedUser.getId());

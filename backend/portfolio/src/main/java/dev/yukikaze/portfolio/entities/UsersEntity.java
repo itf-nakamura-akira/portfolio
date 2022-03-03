@@ -1,12 +1,16 @@
 package dev.yukikaze.portfolio.entities;
 
 import dev.yukikaze.portfolio.enums.UsersPermission;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * users テーブルのEntity
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UsersEntity {
     /**
      * ID
