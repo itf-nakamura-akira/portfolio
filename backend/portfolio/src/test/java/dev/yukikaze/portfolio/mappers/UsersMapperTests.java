@@ -156,4 +156,70 @@ public class UsersMapperTests {
         // データの挿入(users.accountによる一意性エラー)
         assertThrows(DuplicateKeyException.class, () -> this.usersMapper.insertUser(existsUser));
     }
+
+    @Test
+    @DisplayName("updateUser メソッドのテスト")
+    public void updateUser() {
+        // 更新後のデータ(期待値)
+        String assertAccount = "admin-updated";
+        String assertPassword = "password-updated";
+        String assertName = "管理者ユーザー-updated";
+        UsersPermission assertPermission = UsersPermission.User;
+        Boolean assertIsEnabled = false;
+
+        // データの編集
+        UsersEntity updateUser = this.usersMapper.selectById(1L).get();
+        updateUser.setAccount(assertAccount);
+        updateUser.setPasswordHash(assertPassword);
+        updateUser.setName(assertName);
+        updateUser.setPermission(assertPermission);
+        updateUser.setIsEnabled(assertIsEnabled);
+
+        // 更新
+        assertThat(this.usersMapper.updateUser(updateUser)).isTrue();
+
+        // 更新後のデータ取得
+        updateUser = this.usersMapper.selectById(1L).get();
+
+        // データの確認
+        assertThat(updateUser.getAccount()).isEqualTo(assertAccount);
+        assertThat(updateUser.getPasswordHash()).isEqualTo(assertPassword);
+        assertThat(updateUser.getName()).isEqualTo(assertName);
+        assertThat(updateUser.getPermission()).isEqualTo(assertPermission);
+        assertThat(updateUser.getIsEnabled()).isEqualTo(assertIsEnabled);
+
+        // 更新後のデータ(期待値)
+        assertAccount = "admin-updated-updated";
+        assertPassword = "password-updated-updated";
+        assertName = "管理者ユーザー-updated-updated";
+        assertPermission = UsersPermission.Admin;
+        assertIsEnabled = true;
+
+        // データの編集
+        updateUser = this.usersMapper.selectById(1L).get();
+        updateUser.setAccount(assertAccount);
+        updateUser.setPasswordHash(assertPassword);
+        updateUser.setName(assertName);
+        updateUser.setPermission(assertPermission);
+        updateUser.setIsEnabled(assertIsEnabled);
+
+        // 更新
+        assertThat(this.usersMapper.updateUser(updateUser)).isTrue();
+
+        // 更新後のデータ取得
+        updateUser = this.usersMapper.selectById(1L).get();
+
+        // データの確認
+        assertThat(updateUser.getAccount()).isEqualTo(assertAccount);
+        assertThat(updateUser.getPasswordHash()).isEqualTo(assertPassword);
+        assertThat(updateUser.getName()).isEqualTo(assertName);
+        assertThat(updateUser.getPermission()).isEqualTo(assertPermission);
+        assertThat(updateUser.getIsEnabled()).isEqualTo(assertIsEnabled);
+
+        // 存在しないIDの指定
+        updateUser.setId(-1L);
+
+        // 更新
+        assertThat(this.usersMapper.updateUser(updateUser)).isFalse();
+    }
 }

@@ -41,4 +41,13 @@ public interface UsersMapper {
      * @param user 挿入するユーザーデータ
      */
     public void insertUser(UsersEntity user);
+
+    /**
+     * ユーザーの更新
+     * 
+     * @param user 更新するユーザーデータ
+     * 
+     * @return 1件以上更新されたらtrue 0件だとfalse
+     */
+    public boolean updateUser(UsersEntity user);
 }

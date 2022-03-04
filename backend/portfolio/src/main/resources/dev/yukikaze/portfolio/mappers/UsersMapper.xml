@@ -33,4 +33,17 @@
         VALUES
             (#{account}, #{passwordHash}, #{name}, #{permission}, #{isEnabled});
     </insert>
+
+    <update id="updateUser">
+        UPDATE
+            users
+        SET
+            account = #{account},
+            password_hash = #{passwordHash},
+            name = #{name},
+            permission = #{permission},
+            is_enabled = #{isEnabled}
+        WHERE
+            id = #{id};
+    </update>
 </mapper>
