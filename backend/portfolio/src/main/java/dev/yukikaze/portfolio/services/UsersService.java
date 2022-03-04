@@ -101,19 +101,12 @@ public class UsersService {
      */
     public UsersEntity updateUser(Long id, String account, String name, UsersPermission permission,
             Boolean isEnabled) {
-        var updateUser = new UsersEntity();
-        updateUser.setId(id);
-        updateUser.setAccount(account);
-        updateUser.setName(name);
-        updateUser.setPermission(permission);
-        updateUser.setIsEnabled(isEnabled);
-
-        if (!this.usersMapper.updateUser(updateUser)) {
+        if (!this.usersMapper.updateUser(id, account, name, permission, isEnabled)) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
                     "更新対象のデータが見つかりませんでした。");
         }
 
-        return updateUser;
+        return new UsersEntity(id, account, "", name, permission, isEnabled);
     }
 
     /**

@@ -109,22 +109,27 @@ public class UsersMapperMock implements UsersMapper {
         /**
          * ユーザーの更新
          * 
-         * @param user 更新するユーザーデータ
+         * @param id ID
+         * @param account アカウント
+         * @param name 表示名
+         * @param permission ユーザー権限
+         * @param isEnabled 有効フラグ
          * 
          * @return 1件以上更新されたらtrue 0件だとfalse
          */
-        public boolean updateUser(UsersEntity user) {
+        public boolean updateUser(Long id, String account, String name, UsersPermission permission,
+                        Boolean isEnabled) {
                 Optional<UsersEntity> target = this.MOCK_DATA.stream()
-                                .filter(row -> row.getId().equals(user.getId())).findFirst();
+                                .filter(row -> row.getId().equals(id)).findFirst();
 
                 if (target.isEmpty()) {
                         return false;
                 }
 
-                target.get().setAccount(user.getAccount());
-                target.get().setName(user.getName());
-                target.get().setPermission(user.getPermission());
-                target.get().setIsEnabled(user.getIsEnabled());
+                target.get().setAccount(account);
+                target.get().setName(name);
+                target.get().setPermission(permission);
+                target.get().setIsEnabled(isEnabled);
 
                 return true;
         }

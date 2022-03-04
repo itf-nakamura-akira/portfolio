@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
 import dev.yukikaze.portfolio.entities.UsersEntity;
+import dev.yukikaze.portfolio.enums.UsersPermission;
 
 /**
  * users テーブルの問い合わせインターフェイス
@@ -45,11 +46,16 @@ public interface UsersMapper {
     /**
      * ユーザーの更新
      * 
-     * @param user 更新するユーザーデータ
+     * @param id ID
+     * @param account アカウント
+     * @param name 表示名
+     * @param permission ユーザー権限
+     * @param isEnabled 有効フラグ
      * 
      * @return 1件以上更新されたらtrue 0件だとfalse
      */
-    public boolean updateUser(UsersEntity user);
+    public boolean updateUser(Long id, String account, String name, UsersPermission permission,
+            Boolean isEnabled);
 
     /**
      * パスワードの更新

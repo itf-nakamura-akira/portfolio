@@ -160,67 +160,49 @@ public class UsersMapperTests {
     @Test
     @DisplayName("updateUser メソッドのテスト")
     public void updateUser() {
+        // 更新対象
+        Long targetUserId = 1L;
+
         // 更新後のデータ(期待値)
         String assertAccount = "admin-updated";
-        String assertPassword = "password-updated";
         String assertName = "管理者ユーザー-updated";
         UsersPermission assertPermission = UsersPermission.User;
         Boolean assertIsEnabled = false;
 
-        // データの編集
-        UsersEntity updateUser = this.usersMapper.selectById(1L).get();
-        updateUser.setAccount(assertAccount);
-        updateUser.setPasswordHash(assertPassword);
-        updateUser.setName(assertName);
-        updateUser.setPermission(assertPermission);
-        updateUser.setIsEnabled(assertIsEnabled);
-
         // 更新
-        assertThat(this.usersMapper.updateUser(updateUser)).isTrue();
+        assertThat(this.usersMapper.updateUser(targetUserId, assertAccount, assertName,
+                assertPermission, assertIsEnabled)).isTrue();
 
         // 更新後のデータ取得
-        updateUser = this.usersMapper.selectById(1L).get();
+        UsersEntity updateUser = this.usersMapper.selectById(targetUserId).get();
 
         // データの確認
         assertThat(updateUser.getAccount()).isEqualTo(assertAccount);
-        assertThat(updateUser.getPasswordHash()).isEqualTo(assertPassword);
         assertThat(updateUser.getName()).isEqualTo(assertName);
         assertThat(updateUser.getPermission()).isEqualTo(assertPermission);
         assertThat(updateUser.getIsEnabled()).isEqualTo(assertIsEnabled);
 
         // 更新後のデータ(期待値)
         assertAccount = "admin-updated-updated";
-        assertPassword = "password-updated-updated";
         assertName = "管理者ユーザー-updated-updated";
         assertPermission = UsersPermission.Admin;
         assertIsEnabled = true;
 
-        // データの編集
-        updateUser = this.usersMapper.selectById(1L).get();
-        updateUser.setAccount(assertAccount);
-        updateUser.setPasswordHash(assertPassword);
-        updateUser.setName(assertName);
-        updateUser.setPermission(assertPermission);
-        updateUser.setIsEnabled(assertIsEnabled);
-
         // 更新
-        assertThat(this.usersMapper.updateUser(updateUser)).isTrue();
+        assertThat(this.usersMapper.updateUser(targetUserId, assertAccount, assertName,
+                assertPermission, assertIsEnabled)).isTrue();
 
         // 更新後のデータ取得
-        updateUser = this.usersMapper.selectById(1L).get();
+        updateUser = this.usersMapper.selectById(targetUserId).get();
 
         // データの確認
         assertThat(updateUser.getAccount()).isEqualTo(assertAccount);
-        assertThat(updateUser.getPasswordHash()).isEqualTo(assertPassword);
         assertThat(updateUser.getName()).isEqualTo(assertName);
         assertThat(updateUser.getPermission()).isEqualTo(assertPermission);
         assertThat(updateUser.getIsEnabled()).isEqualTo(assertIsEnabled);
 
-        // 存在しないIDの指定
-        updateUser.setId(-1L);
-
-        // 更新
-        assertThat(this.usersMapper.updateUser(updateUser)).isFalse();
+        // 存在しないIDの更新
+        assertThat(this.usersMapper.updateUser(-1L, "", "", UsersPermission.Admin, true)).isFalse();
     }
 
     @Test
@@ -238,7 +220,7 @@ public class UsersMapperTests {
         // データの確認
         assertThat(updateUser.getPasswordHash()).isEqualTo(assertPassword);
 
-        // 存在しないIDの指定の更新
+        // 存在しないIDの更新
         assertThat(this.usersMapper.updateUserPassword(-1L, "")).isFalse();
     }
 }
