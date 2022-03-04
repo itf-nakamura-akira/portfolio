@@ -3,6 +3,7 @@ package dev.yukikaze.portfolio.services;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
@@ -16,13 +17,18 @@ public class UsersServiceTests {
     /**
      * UsersService
      */
-    private static final UsersService usersService = new UsersService(new UsersMapperMock());
+    private UsersService usersService;
+
+    @BeforeEach
+    public void beforeEach() {
+        this.usersService = new UsersService(new UsersMapperMock());
+    }
 
     @Test
     @DisplayName("getUsersAll メソッドのテスト")
     public void getUsersAll() {
         // ユーザーデータの取得
-        List<UsersEntity> usersList = usersService.getUsersAll();
+        List<UsersEntity> usersList = this.usersService.getUsersAll();
 
         // 件数の確認
         assertThat(usersList.size()).isEqualTo(12);
@@ -46,7 +52,7 @@ public class UsersServiceTests {
     @DisplayName("getUserById メソッドのテスト")
     public void getUserById() {
         // 「管理者ユーザー」の指定
-        UsersEntity adminUser = usersService.getUserById(1L);
+        UsersEntity adminUser = this.usersService.getUserById(1L);
 
         // データの確認
         assertThat(adminUser.getId()).isEqualTo(1L);
@@ -58,8 +64,8 @@ public class UsersServiceTests {
         assertThat(adminUser.getIsEnabled()).isEqualTo(true);
 
         // 存在しないユーザーの指定
-        ResponseStatusException e =
-                assertThrows(ResponseStatusException.class, () -> usersService.getUserById(-1L));
+        ResponseStatusException e = assertThrows(ResponseStatusException.class,
+                () -> this.usersService.getUserById(-1L));
 
         // 例外の確認
         assertThat(e.getStatus()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -67,33 +73,69 @@ public class UsersServiceTests {
     }
 
     @Test
-    @DisplayName("saveUser メソッドのテスト")
-    public void saveUser() {
-        // 追加するデータ
-        String assertAccount = "test-user";
-        String assertPassword = "パスワードハッシュ";
-        String assertName = "テストユーザー";
-        UsersPermission assertPermission = UsersPermission.Admin;
-        Boolean assertIsEnabled = true;
+    @DisplayName("addUser メソッドのテスト")
+    public void addUser() {
+        // ユーザーデータの追加
+        UsersEntity addedUser = this.usersService.addUser("test-user", "パスワードハッシュ", "テストユーザー",
+                UsersPermission.Admin, true);
 
-        // ユーザーデータの取得
-        UsersEntity addedUser = usersService.saveUser(assertAccount, assertPassword, assertName,
-                assertPermission, assertIsEnabled);
+        // 追加したデータの取得
+        UsersEntity assertAddedUser = this.usersService.getUserById(addedUser.getId());
 
         // データの確認
-        assertThat(addedUser.getId()).isNotEqualTo(null);
-        assertThat(addedUser.getAccount()).isEqualTo(assertAccount);
-        assertThat(addedUser.getPasswordHash()).isNotEqualTo(assertPassword);
-        assertThat(addedUser.getName()).isEqualTo(assertName);
-        assertThat(addedUser.getPermission()).isEqualTo(assertPermission);
-        assertThat(addedUser.getIsEnabled()).isEqualTo(assertIsEnabled);
+        assertThat(addedUser.getId()).isEqualTo(assertAddedUser.getId());
+        assertThat(addedUser.getAccount()).isEqualTo(assertAddedUser.getAccount());
+        assertThat(addedUser.getPasswordHash()).isEqualTo(assertAddedUser.getPasswordHash());
+        assertThat(addedUser.getName()).isEqualTo(assertAddedUser.getName());
+        assertThat(addedUser.getPermission()).isEqualTo(assertAddedUser.getPermission());
+        assertThat(addedUser.getIsEnabled()).isEqualTo(assertAddedUser.getIsEnabled());
 
         // 既に登録済みのアカウントの挿入
-        ResponseStatusException e = assertThrows(ResponseStatusException.class, () -> usersService
-                .saveUser("admin", assertPassword, assertName, assertPermission, assertIsEnabled));
+        ResponseStatusException e =
+                assertThrows(ResponseStatusException.class, () -> this.usersService.addUser("admin",
+                        "パスワードハッシュ", "テストユーザー", UsersPermission.Admin, true));
 
         // 例外の確認
         assertThat(e.getStatus()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
         assertThat(e.getReason()).isEqualTo("「admin」というユーザーは既に存在しています。");
+    }
+
+    @Test
+    @DisplayName("updateUser メソッドのテスト")
+    public void updateUser() {
+        // ユーザーデータの更新
+        UsersEntity updatedUser = this.usersService.updateUser(1L, "user-update", "テストユーザー-update",
+                UsersPermission.Admin, true);
+
+        // 更新したデータの取得
+        UsersEntity assertUpdatedUser = this.usersService.getUserById(1L);
+
+        // データの確認
+        assertThat(updatedUser.getAccount()).isEqualTo(assertUpdatedUser.getAccount());
+        assertThat(updatedUser.getName()).isEqualTo(assertUpdatedUser.getName());
+        assertThat(updatedUser.getPermission()).isEqualTo(assertUpdatedUser.getPermission());
+        assertThat(updatedUser.getIsEnabled()).isEqualTo(assertUpdatedUser.getIsEnabled());
+
+        // ユーザーデータの更新
+        updatedUser = this.usersService.updateUser(1L, "user-update", "テストユーザー-update",
+                UsersPermission.User, false);
+
+        // 更新したデータの取得
+        assertUpdatedUser = this.usersService.getUserById(1L);
+
+        // データの確認
+        assertThat(updatedUser.getAccount()).isEqualTo(assertUpdatedUser.getAccount());
+        assertThat(updatedUser.getName()).isEqualTo(assertUpdatedUser.getName());
+        assertThat(updatedUser.getPermission()).isEqualTo(assertUpdatedUser.getPermission());
+        assertThat(updatedUser.getIsEnabled()).isEqualTo(assertUpdatedUser.getIsEnabled());
+
+        // 存在しないユーザーの指定
+        ResponseStatusException e =
+                assertThrows(ResponseStatusException.class, () -> this.usersService.updateUser(-1L,
+                        "user-update", "テストユーザー-update", UsersPermission.User, false));
+
+        // 例外の確認
+        assertThat(e.getStatus()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
+        assertThat(e.getReason()).isEqualTo("更新対象のデータが見つかりませんでした。");
     }
 }

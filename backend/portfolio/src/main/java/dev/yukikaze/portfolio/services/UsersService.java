@@ -68,7 +68,7 @@ public class UsersService {
      * 
      * @return 追加したユーザーのデータ
      */
-    public UsersEntity saveUser(String account, String password, String name,
+    public UsersEntity addUser(String account, String password, String name,
             UsersPermission permission, Boolean isEnabled) {
         String hashedPassword = this.getHashedPassword(password);
         var addUser = new UsersEntity();
@@ -86,6 +86,34 @@ public class UsersService {
         }
 
         return addUser;
+    }
+
+    /**
+     * ユーザーデータを更新する(パスワードは除く)
+     * 
+     * @param id ID
+     * @param account アカウント
+     * @param name 表示名
+     * @param permission ユーザー権限
+     * @param isEnabled 有効フラグ
+     * 
+     * @return 更新したユーザーのデータ
+     */
+    public UsersEntity updateUser(Long id, String account, String name, UsersPermission permission,
+            Boolean isEnabled) {
+        var updateUser = new UsersEntity();
+        updateUser.setId(id);
+        updateUser.setAccount(account);
+        updateUser.setName(name);
+        updateUser.setPermission(permission);
+        updateUser.setIsEnabled(isEnabled);
+
+        if (!this.usersMapper.updateUser(updateUser)) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "更新対象のデータが見つかりませんでした。");
+        }
+
+        return updateUser;
     }
 
     /**

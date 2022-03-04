@@ -101,6 +101,9 @@ public class UsersMapperMock implements UsersMapper {
                 user.setId(this.MOCK_DATA.stream()
                                 .max((row1, row2) -> Long.compare(row1.getId(), row2.getId())).get()
                                 .getId() + 1);
+
+                // 追加
+                this.MOCK_DATA.add(user);
         }
 
         /**
@@ -111,6 +114,18 @@ public class UsersMapperMock implements UsersMapper {
          * @return 1件以上更新されたらtrue 0件だとfalse
          */
         public boolean updateUser(UsersEntity user) {
-                return this.MOCK_DATA.stream().anyMatch(row -> row.getId().equals(user.getId()));
+                Optional<UsersEntity> target = this.MOCK_DATA.stream()
+                                .filter(row -> row.getId().equals(user.getId())).findFirst();
+
+                if (target.isEmpty()) {
+                        return false;
+                }
+
+                target.get().setAccount(user.getAccount());
+                target.get().setName(user.getName());
+                target.get().setPermission(user.getPermission());
+                target.get().setIsEnabled(user.getIsEnabled());
+
+                return true;
         }
 }
