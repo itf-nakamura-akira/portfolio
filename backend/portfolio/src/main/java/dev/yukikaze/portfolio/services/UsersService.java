@@ -36,8 +36,8 @@ public class UsersService {
      * 
      * @return ユーザーデータ全件
      */
-    public List<UsersEntity> findAll() {
-        List<UsersEntity> usersList = this.usersMapper.findAll();
+    public List<UsersEntity> getUsersAll() {
+        List<UsersEntity> usersList = this.usersMapper.selectAll();
 
         return usersList;
     }
@@ -49,8 +49,8 @@ public class UsersService {
      * 
      * @return ユーザーデータ
      */
-    public UsersEntity findById(Long userId) {
-        UsersEntity user = this.usersMapper.findById(userId)
+    public UsersEntity getUserById(Long userId) {
+        UsersEntity user = this.usersMapper.selectById(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
                         "存在しないユーザーIDが指定されました。"));
 
@@ -68,7 +68,7 @@ public class UsersService {
      * 
      * @return 追加したユーザーのデータ
      */
-    public UsersEntity insertUser(String account, String password, String name,
+    public UsersEntity saveUser(String account, String password, String name,
             UsersPermission permission, Boolean isEnabled) {
         String hashedPassword = this.getHashedPassword(password);
         var addUser = new UsersEntity();

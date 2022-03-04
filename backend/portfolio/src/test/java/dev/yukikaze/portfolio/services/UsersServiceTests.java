@@ -20,12 +20,12 @@ public class UsersServiceTests {
     private static final UsersService usersService = new UsersService(new UsersMapperMock());
 
     /**
-     * findAll メソッドのテスト
+     * getUsersAll メソッドのテスト
      */
     @Test
-    public void findAll() {
+    public void getUsersAll() {
         // ユーザーデータの取得
-        List<UsersEntity> usersList = usersService.findAll();
+        List<UsersEntity> usersList = usersService.getUsersAll();
 
         // 件数の確認
         assertThat(usersList.size()).isEqualTo(12);
@@ -46,12 +46,12 @@ public class UsersServiceTests {
     }
 
     /**
-     * findById メソッドのテスト
+     * getUserById メソッドのテスト
      */
     @Test
-    public void findById() {
+    public void getUserById() {
         // 「管理者ユーザー」の指定
-        UsersEntity adminUser = usersService.findById(1L);
+        UsersEntity adminUser = usersService.getUserById(1L);
 
         // データの確認
         assertThat(adminUser.getId()).isEqualTo(1L);
@@ -64,7 +64,7 @@ public class UsersServiceTests {
 
         // 存在しないユーザーの指定
         ResponseStatusException e =
-                assertThrows(ResponseStatusException.class, () -> usersService.findById(-1L));
+                assertThrows(ResponseStatusException.class, () -> usersService.getUserById(-1L));
 
         // 例外の確認
         assertThat(e.getStatus()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -72,10 +72,10 @@ public class UsersServiceTests {
     }
 
     /**
-     * insertUser メソッドのテスト
+     * saveUser メソッドのテスト
      */
     @Test
-    public void insertUser() {
+    public void saveUser() {
         // 追加するデータ
         String assertAccount = "test-user";
         String assertPassword = "パスワードハッシュ";
@@ -84,7 +84,7 @@ public class UsersServiceTests {
         Boolean assertIsEnabled = true;
 
         // ユーザーデータの取得
-        UsersEntity addedUser = usersService.insertUser(assertAccount, assertPassword, assertName,
+        UsersEntity addedUser = usersService.saveUser(assertAccount, assertPassword, assertName,
                 assertPermission, assertIsEnabled);
 
         // データの確認
@@ -96,9 +96,8 @@ public class UsersServiceTests {
         assertThat(addedUser.getIsEnabled()).isEqualTo(assertIsEnabled);
 
         // 既に登録済みのアカウントの挿入
-        ResponseStatusException e =
-                assertThrows(ResponseStatusException.class, () -> usersService.insertUser("admin",
-                        assertPassword, assertName, assertPermission, assertIsEnabled));
+        ResponseStatusException e = assertThrows(ResponseStatusException.class, () -> usersService
+                .saveUser("admin", assertPassword, assertName, assertPermission, assertIsEnabled));
 
         // 例外の確認
         assertThat(e.getStatus()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);

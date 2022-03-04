@@ -27,12 +27,12 @@ public class UsersMapperTests {
     private UsersMapper usersMapper;
 
     /**
-     * findAll メソッドのテスト
+     * selectAll メソッドのテスト
      */
     @Test
-    public void findAll() {
+    public void selectAll() {
         // データの取得
-        List<UsersEntity> usersList = this.usersMapper.findAll();
+        List<UsersEntity> usersList = this.usersMapper.selectAll();
 
         // 件数の確認
         assertThat(usersList.size()).isEqualTo(12);
@@ -53,12 +53,12 @@ public class UsersMapperTests {
     }
 
     /**
-     * findById メソッドのテスト
+     * selectById メソッドのテスト
      */
     @Test
-    public void findById() {
+    public void selectById() {
         // 「管理者ユーザー」のデータの取得
-        UsersEntity adminUser = this.usersMapper.findById(1L).get();
+        UsersEntity adminUser = this.usersMapper.selectById(1L).get();
 
         // データの確認
         assertThat(adminUser.getId()).isEqualTo(1L);
@@ -70,7 +70,7 @@ public class UsersMapperTests {
         assertThat(adminUser.getIsEnabled()).isEqualTo(true);
 
         // 「齋藤 綾香」のデータの取得
-        UsersEntity ichinoheUser = this.usersMapper.findById(11L).get();
+        UsersEntity ichinoheUser = this.usersMapper.selectById(11L).get();
 
         // データの確認
         assertThat(ichinoheUser.getId()).isEqualTo(11L);
@@ -82,7 +82,7 @@ public class UsersMapperTests {
         assertThat(ichinoheUser.getIsEnabled()).isEqualTo(false);
 
         // 「参照ユーザー」のデータの取得
-        UsersEntity referencerUser = this.usersMapper.findById(12L).get();
+        UsersEntity referencerUser = this.usersMapper.selectById(12L).get();
 
         // データの確認
         assertThat(referencerUser.getId()).isEqualTo(12L);
@@ -94,19 +94,19 @@ public class UsersMapperTests {
         assertThat(referencerUser.getIsEnabled()).isEqualTo(true);
 
         // 存在しないユーザーの取得
-        Optional<UsersEntity> notExistsUser = this.usersMapper.findById(-1L);
+        Optional<UsersEntity> notExistsUser = this.usersMapper.selectById(-1L);
 
         // データの確認
         assertThat(notExistsUser).isEmpty();
     }
 
     /**
-     * findByAccount メソッドのテスト
+     * selectByAccount メソッドのテスト
      */
     @Test
-    public void findByAccount() {
+    public void selectByAccount() {
         // 「admin」のデータの取得
-        UsersEntity adminUser = this.usersMapper.findByAccount("admin").get();
+        UsersEntity adminUser = this.usersMapper.selectByAccount("admin").get();
 
         // データの確認
         assertThat(adminUser.getId()).isEqualTo(1L);
@@ -118,7 +118,7 @@ public class UsersMapperTests {
         assertThat(adminUser.getIsEnabled()).isEqualTo(true);
 
         // 存在しないユーザーの取得
-        Optional<UsersEntity> notExistsUser = this.usersMapper.findByAccount("not exists user");
+        Optional<UsersEntity> notExistsUser = this.usersMapper.selectByAccount("not exists user");
 
         // データの確認
         assertThat(notExistsUser).isEmpty();
@@ -147,7 +147,7 @@ public class UsersMapperTests {
         assertThat(addUser.getId()).isNotEqualTo(null);
 
         // DBから挿入したデータを取得する
-        UsersEntity addedUser = this.usersMapper.findById(addUser.getId()).get();
+        UsersEntity addedUser = this.usersMapper.selectById(addUser.getId()).get();
 
         // データの確認
         assertThat(addUser.getId()).isEqualTo(addedUser.getId());

@@ -22,25 +22,25 @@ public class UsersMapperMock implements UsersMapper {
             new UsersEntity(2L, "saito",
                     "$2a$10$ZDcm9KoNyZske8wAFnsyu.VbaeoaNgWwuFmff3mMe2Yrf39aT0IJu", "齋藤 綾香",
                     UsersPermission.User, true),
-            new UsersEntity(13L, "shirahama",
+            new UsersEntity(3L, "shirahama",
                     "$2a$10$6wSX9vpPzUorr.TSGaO4CObyvt6aZHicTEULdk.gJCtSK6SdfbJCC", "白浜 隆二",
                     UsersPermission.User, true),
-            new UsersEntity(14L, "yamaoka",
+            new UsersEntity(4L, "yamaoka",
                     "$2a$10$91BFfXg80xm1KvVeSzmcMeTjq8kdIJWo0sF9wFGbCP6S1v5oL5dMK", "山岡 友治",
                     UsersPermission.User, true),
-            new UsersEntity(15L, "sakata",
+            new UsersEntity(5L, "sakata",
                     "$2a$10$bUlnL/CJw/1nkS.o7mzANO0Zx7d5DvxWa83fSGHOJVSRNfqac1G72", "阪田 智恵",
                     UsersPermission.User, true),
-            new UsersEntity(16L, "imadu",
+            new UsersEntity(6L, "imadu",
                     "$2a$10$QBmA5RGycbyQZOUUzzf9POEkWatY0qoQxfubZnag0cPVzSDCn9Ebq", "今津 重光",
                     UsersPermission.User, true),
-            new UsersEntity(17L, "kawakami",
+            new UsersEntity(7L, "kawakami",
                     "$2a$10$XwxrNn0B2dUB30F/BM61EuhGCWSnHKch8gP7XgQNR5P/1Rx1WlwpK", "川上 伸夫",
                     UsersPermission.User, true),
-            new UsersEntity(18L, "shikata",
+            new UsersEntity(8L, "shikata",
                     "$2a$10$qFveWYis.1ZGtzeDhx5Id.tjJxkY2pIm1GVMwKZ0nvnTqz/ZKLrou", "四方 謙三",
                     UsersPermission.User, true),
-            new UsersEntity(19L, "nojiri",
+            new UsersEntity(9L, "nojiri",
                     "$2a$10$5YRzeddgE6s7cZUqcPNBw.Nqqy24/pFCOC0Bpu6hbakGuASJtyyMO", "野尻 欧子",
                     UsersPermission.User, true),
             new UsersEntity(10L, "yahata",
@@ -55,40 +55,40 @@ public class UsersMapperMock implements UsersMapper {
 
     /**
      * 全件取得
-     * 
+     *
      * @return テーブルの全データ
      */
-    public List<UsersEntity> findAll() {
+    public List<UsersEntity> selectAll() {
         return this.MOCK_DATA;
     }
 
     /**
      * IDを指定してユーザーを取得する
-     * 
+     *
      * @param id ID
-     * 
+     *
      * @return 指定した1件のデータ
      */
-    public Optional<UsersEntity> findById(Long id) {
+    public Optional<UsersEntity> selectById(Long id) {
         return this.MOCK_DATA.stream().filter(row -> row.getId().equals(id)).findFirst();
     }
 
     /**
      * アカウントを指定してユーザーを取得する
-     * 
+     *
      * @param account アカウント
-     * 
+     *
      * @return 指定した1件のデータ
      */
-    public Optional<UsersEntity> findByAccount(String account) {
+    public Optional<UsersEntity> selectByAccount(String account) {
         return this.MOCK_DATA.stream().filter(row -> row.getAccount().equals(account)).findFirst();
     }
 
     /**
      * ユーザーの追加
-     * 
+     *
      * @param user 挿入するユーザーデータ
-     * 
+     *
      * @return 挿入した件数(= 1)
      */
     public Integer insertUser(UsersEntity user) {

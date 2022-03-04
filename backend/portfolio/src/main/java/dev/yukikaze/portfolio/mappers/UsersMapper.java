@@ -15,7 +15,7 @@ public interface UsersMapper {
      * 
      * @return テーブルの全データ
      */
-    public List<UsersEntity> findAll();
+    public List<UsersEntity> selectAll();
 
     /**
      * IDを指定してユーザーを取得する
@@ -24,7 +24,7 @@ public interface UsersMapper {
      * 
      * @return 指定した1件のデータ
      */
-    public Optional<UsersEntity> findById(Long id);
+    public Optional<UsersEntity> selectById(Long id);
 
     /**
      * アカウントを指定してユーザーを取得する
@@ -33,7 +33,7 @@ public interface UsersMapper {
      * 
      * @return 指定した1件のデータ
      */
-    public Optional<UsersEntity> findByAccount(String account);
+    public Optional<UsersEntity> selectByAccount(String account);
 
     /**
      * ユーザーの追加
