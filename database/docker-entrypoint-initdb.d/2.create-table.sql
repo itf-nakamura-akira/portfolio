@@ -2,7 +2,7 @@
 SET CHARACTER_SET_CONNECTION = utf8mb4;
 
 -- Project Name : Portfolio
--- Date/Time    : 2022/03/02 20:53:53
+-- Date/Time    : 2022/03/04 15:11:15
 -- Author       : Akira Nakamura - ITFLLC
 -- RDBMS Type   : MySQL
 -- Application  : A5:SQL Mk-2
@@ -18,3 +18,4 @@ create table users (
   , constraint users_PKC primary key (id)
 ) comment 'ユーザー' ;
 
+alter table users add unique users_IX1 (account) ;
