@@ -1,6 +1,7 @@
 package dev.yukikaze.portfolio.services;
 
 import java.util.List;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -69,8 +70,6 @@ public class UsersService {
      */
     public UsersEntity insertUser(String account, String password, String name,
             UsersPermission permission, Boolean isEnabled) {
-        // TODO: 既存ユーザーアカウントのチェック処理
-
         String hashedPassword = this.getHashedPassword(password);
         var addUser = new UsersEntity();
         addUser.setAccount(account);
@@ -79,7 +78,12 @@ public class UsersService {
         addUser.setPermission(permission);
         addUser.setIsEnabled(isEnabled);
 
-        this.usersMapper.insertUser(addUser);
+        try {
+            this.usersMapper.insertUser(addUser);
+        } catch (DuplicateKeyException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "「" + account + "」というユーザーは既に存在しています。");
+        }
 
         return addUser;
     }

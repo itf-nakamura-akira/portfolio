@@ -1,12 +1,14 @@
 package dev.yukikaze.portfolio.mappers;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.test.context.ActiveProfiles;
 import dev.yukikaze.portfolio.entities.UsersEntity;
 import dev.yukikaze.portfolio.enums.UsersPermission;
@@ -99,6 +101,30 @@ public class UsersMapperTests {
     }
 
     /**
+     * findByAccount メソッドのテスト
+     */
+    @Test
+    public void findByAccount() {
+        // 「admin」のデータの取得
+        UsersEntity adminUser = this.usersMapper.findByAccount("admin").get();
+
+        // データの確認
+        assertThat(adminUser.getId()).isEqualTo(1L);
+        assertThat(adminUser.getAccount()).isEqualTo("admin");
+        assertThat(adminUser.getPasswordHash())
+                .isEqualTo("$2a$10$NHwSXeZd7ieiIKKGsOqcteNdZoND9VfQqkB9yIdUnNh4Dq48DTv7q");
+        assertThat(adminUser.getName()).isEqualTo("管理者ユーザー");
+        assertThat(adminUser.getPermission()).isEqualTo(UsersPermission.Admin);
+        assertThat(adminUser.getIsEnabled()).isEqualTo(true);
+
+        // 存在しないユーザーの取得
+        Optional<UsersEntity> notExistsUser = this.usersMapper.findByAccount("not exists user");
+
+        // データの確認
+        assertThat(notExistsUser).isEmpty();
+    }
+
+    /**
      * insertUser メソッドのテスト
      */
     @Test
@@ -130,5 +156,16 @@ public class UsersMapperTests {
         assertThat(addUser.getName()).isEqualTo(addedUser.getName());
         assertThat(addUser.getPermission()).isEqualTo(addedUser.getPermission());
         assertThat(addUser.getIsEnabled()).isEqualTo(addedUser.getIsEnabled());
+
+        // 既に存在しているアカウントでINSERTする
+        var existsUser = new UsersEntity();
+        existsUser.setAccount("admin");
+        existsUser.setPasswordHash("パスワードハッシュ");
+        existsUser.setName("既存ユーザー");
+        existsUser.setPermission(UsersPermission.Admin);
+        existsUser.setIsEnabled(true);
+
+        // データの挿入(users.accountによる一意性エラー)
+        assertThrows(DuplicateKeyException.class, () -> this.usersMapper.insertUser(existsUser));
     }
 }

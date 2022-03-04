@@ -50,6 +50,18 @@ public class UsersServiceTests {
      */
     @Test
     public void findById() {
+        // 「管理者ユーザー」の指定
+        UsersEntity adminUser = usersService.findById(1L);
+
+        // データの確認
+        assertThat(adminUser.getId()).isEqualTo(1L);
+        assertThat(adminUser.getAccount()).isEqualTo("admin");
+        assertThat(adminUser.getPasswordHash())
+                .isEqualTo("$2a$10$NHwSXeZd7ieiIKKGsOqcteNdZoND9VfQqkB9yIdUnNh4Dq48DTv7q");
+        assertThat(adminUser.getName()).isEqualTo("管理者ユーザー");
+        assertThat(adminUser.getPermission()).isEqualTo(UsersPermission.Admin);
+        assertThat(adminUser.getIsEnabled()).isEqualTo(true);
+
         // 存在しないユーザーの指定
         ResponseStatusException e =
                 assertThrows(ResponseStatusException.class, () -> usersService.findById(-1L));
@@ -83,6 +95,13 @@ public class UsersServiceTests {
         assertThat(addedUser.getPermission()).isEqualTo(assertPermission);
         assertThat(addedUser.getIsEnabled()).isEqualTo(assertIsEnabled);
 
-        // TODO: アカウントが被ってた場合の例外テストの追加
+        // 既に登録済みのアカウントの挿入
+        ResponseStatusException e =
+                assertThrows(ResponseStatusException.class, () -> usersService.insertUser("admin",
+                        assertPassword, assertName, assertPermission, assertIsEnabled));
+
+        // 例外の確認
+        assertThat(e.getStatus()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
+        assertThat(e.getReason()).isEqualTo("「admin」というユーザーは既に存在しています。");
     }
 }

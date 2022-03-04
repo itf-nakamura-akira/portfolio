@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.dao.DuplicateKeyException;
 import dev.yukikaze.portfolio.entities.UsersEntity;
 import dev.yukikaze.portfolio.enums.UsersPermission;
 
@@ -73,6 +74,17 @@ public class UsersMapperMock implements UsersMapper {
     }
 
     /**
+     * アカウントを指定してユーザーを取得する
+     * 
+     * @param account アカウント
+     * 
+     * @return 指定した1件のデータ
+     */
+    public Optional<UsersEntity> findByAccount(String account) {
+        return this.MOCK_DATA.stream().filter(row -> row.getAccount().equals(account)).findFirst();
+    }
+
+    /**
      * ユーザーの追加
      * 
      * @param user 挿入するユーザーデータ
@@ -80,6 +92,12 @@ public class UsersMapperMock implements UsersMapper {
      * @return 挿入した件数(= 1)
      */
     public Integer insertUser(UsersEntity user) {
+        // accountが重複しているかチェック
+        this.MOCK_DATA.stream().filter(row -> row.getAccount().equals(user.getAccount())).findAny()
+                .ifPresent((row) -> {
+                    throw new DuplicateKeyException("");
+                });
+
         // 擬似的にID割り当てる
         user.setId(this.MOCK_DATA.stream()
                 .max((row1, row2) -> Long.compare(row1.getId(), row2.getId())).get().getId() + 1);

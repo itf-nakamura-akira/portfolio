@@ -8,6 +8,7 @@
         FROM
             users;
     </select>
+
     <select id="findById" resultType="UsersEntity">
         SELECT
             *
@@ -16,6 +17,16 @@
         WHERE
             id = #{id};
     </select>
+
+    <select id="findByAccount" resultType="UsersEntity">
+        SELECT
+            *
+        FROM
+            users
+        WHERE
+            account = #{account};
+    </select>
+
     <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO users
             (account, password_hash, name, permission, is_enabled)

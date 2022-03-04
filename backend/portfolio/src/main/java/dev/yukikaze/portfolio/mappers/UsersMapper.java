@@ -27,6 +27,15 @@ public interface UsersMapper {
     public Optional<UsersEntity> findById(Long id);
 
     /**
+     * アカウントを指定してユーザーを取得する
+     * 
+     * @param account アカウント
+     * 
+     * @return 指定した1件のデータ
+     */
+    public Optional<UsersEntity> findByAccount(String account);
+
+    /**
      * ユーザーの追加
      * 
      * @param user 挿入するユーザーデータ
