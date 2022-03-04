@@ -88,10 +88,8 @@ public class UsersMapperMock implements UsersMapper {
      * ユーザーの追加
      *
      * @param user 挿入するユーザーデータ
-     *
-     * @return 挿入した件数(= 1)
      */
-    public Integer insertUser(UsersEntity user) {
+    public void insertUser(UsersEntity user) {
         // accountが重複しているかチェック
         this.MOCK_DATA.stream().filter(row -> row.getAccount().equals(user.getAccount())).findAny()
                 .ifPresent((row) -> {
@@ -101,7 +99,5 @@ public class UsersMapperMock implements UsersMapper {
         // 擬似的にID割り当てる
         user.setId(this.MOCK_DATA.stream()
                 .max((row1, row2) -> Long.compare(row1.getId(), row2.getId())).get().getId() + 1);
-
-        return 1;
     }
 }

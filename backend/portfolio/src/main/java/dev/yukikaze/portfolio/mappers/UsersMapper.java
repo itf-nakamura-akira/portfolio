@@ -39,8 +39,6 @@ public interface UsersMapper {
      * ユーザーの追加
      * 
      * @param user 挿入するユーザーデータ
-     * 
-     * @return 挿入した件数(= 1)
      */
-    public Integer insertUser(UsersEntity user);
+    public void insertUser(UsersEntity user);
 }

@@ -129,10 +129,7 @@ public class UsersMapperTests {
         addUser.setIsEnabled(true);
 
         // データの挿入
-        Integer addedCount = this.usersMapper.insertUser(addUser);
-
-        // 挿入された件数が1件
-        assertThat(addedCount).isEqualTo(1);
+        this.usersMapper.insertUser(addUser);
 
         // IDが自動的に割り振られている
         assertThat(addUser.getId()).isNotEqualTo(null);
