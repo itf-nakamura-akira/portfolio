@@ -222,4 +222,23 @@ public class UsersMapperTests {
         // 更新
         assertThat(this.usersMapper.updateUser(updateUser)).isFalse();
     }
+
+    @Test
+    @DisplayName("updateUserPassword メソッドのテスト")
+    public void updateUserPassword() {
+        // 更新後のデータ(期待値)
+        String assertPassword = "パスワードハッシュ";
+
+        // 更新
+        assertThat(this.usersMapper.updateUserPassword(1L, assertPassword)).isTrue();
+
+        // 更新後のデータ取得
+        UsersEntity updateUser = this.usersMapper.selectById(1L).get();
+
+        // データの確認
+        assertThat(updateUser.getPasswordHash()).isEqualTo(assertPassword);
+
+        // 存在しないIDの指定の更新
+        assertThat(this.usersMapper.updateUserPassword(-1L, "")).isFalse();
+    }
 }

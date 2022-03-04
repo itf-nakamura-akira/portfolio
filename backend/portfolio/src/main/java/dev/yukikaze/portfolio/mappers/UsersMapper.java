@@ -50,4 +50,14 @@ public interface UsersMapper {
      * @return 1件以上更新されたらtrue 0件だとfalse
      */
     public boolean updateUser(UsersEntity user);
+
+    /**
+     * パスワードの更新
+     * 
+     * @param id ID
+     * @param passwordHash パスワードハッシュ
+     * 
+     * @return 1件以上更新されたらtrue 0件だとfalse
+     */
+    public boolean updateUserPassword(Long id, String passwordHash);
 }

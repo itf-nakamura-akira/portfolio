@@ -46,4 +46,13 @@
         WHERE
             id = #{id};
     </update>
+
+    <update id="updateUserPassword">
+        UPDATE
+            users
+        SET
+            password_hash = #{passwordHash}
+        WHERE
+            id = #{id};
+    </update>
 </mapper>

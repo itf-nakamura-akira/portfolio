@@ -128,4 +128,25 @@ public class UsersMapperMock implements UsersMapper {
 
                 return true;
         }
+
+        /**
+         * パスワードの更新
+         * 
+         * @param id ID
+         * @param passwordHash パスワードハッシュ
+         * 
+         * @return 1件以上更新されたらtrue 0件だとfalse
+         */
+        public boolean updateUserPassword(Long id, String passwordHash) {
+                Optional<UsersEntity> target = this.MOCK_DATA.stream()
+                                .filter(row -> row.getId().equals(id)).findFirst();
+
+                if (target.isEmpty()) {
+                        return false;
+                }
+
+                target.get().setPasswordHash(passwordHash);
+
+                return true;
+        }
 }
