@@ -66,4 +66,13 @@ public interface UsersMapper {
      * @return 1件以上更新されたらtrue 0件だとfalse
      */
     public boolean updateUserPassword(Long id, String passwordHash);
+
+    /**
+     * ユーザーの削除
+     * 
+     * @param id ID
+     * 
+     * @return 1件以上削除されたらtrue 0件だとfalse
+     */
+    public boolean deleteUser(Long id);
 }

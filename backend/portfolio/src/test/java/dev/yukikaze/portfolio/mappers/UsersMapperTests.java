@@ -223,4 +223,17 @@ public class UsersMapperTests {
         // 存在しないIDの更新
         assertThat(this.usersMapper.updateUserPassword(-1L, "")).isFalse();
     }
+
+    @Test
+    @DisplayName("deleteUser メソッドのテスト")
+    public void deleteUser() {
+        // データの削除
+        assertThat(this.usersMapper.deleteUser(1L)).isTrue();
+
+        // 削除後のデータ取得
+        assertThat(this.usersMapper.selectById(1L)).isEmpty();
+
+        // 存在しないIDの更新
+        assertThat(this.usersMapper.deleteUser(-1L)).isFalse();
+    }
 }

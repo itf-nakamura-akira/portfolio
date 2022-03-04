@@ -110,6 +110,18 @@ public class UsersService {
     }
 
     /**
+     * ユーザーデータを削除する
+     * 
+     * @param id ID
+     */
+    public void deleteUser(Long id) {
+        if (!this.usersMapper.deleteUser(id)) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "削除対象のデータが見つかりませんでした。");
+        }
+    }
+
+    /**
      * ハッシュ化したパスワード文字列を取得する
      * 
      * @param password 元のパスワード文字列

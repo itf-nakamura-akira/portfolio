@@ -154,4 +154,15 @@ public class UsersMapperMock implements UsersMapper {
 
                 return true;
         }
+
+        /**
+         * ユーザーの削除
+         * 
+         * @param id ID
+         * 
+         * @return 1件以上削除されたらtrue 0件だとfalse
+         */
+        public boolean deleteUser(Long id) {
+                return this.MOCK_DATA.removeIf(v -> v.getId().equals(id));
+        }
 }
