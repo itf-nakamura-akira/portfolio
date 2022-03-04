@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.List;
 import java.util.Optional;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +14,10 @@ import org.springframework.test.context.ActiveProfiles;
 import dev.yukikaze.portfolio.entities.UsersEntity;
 import dev.yukikaze.portfolio.enums.UsersPermission;
 
-/**
- * UsersMapper のテストコード
- */
 @MybatisTest
 @ActiveProfiles("test")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@DisplayName("UsersMapper のテストコード")
 public class UsersMapperTests {
     /**
      * UsersMapper
@@ -26,10 +25,8 @@ public class UsersMapperTests {
     @Autowired
     private UsersMapper usersMapper;
 
-    /**
-     * selectAll メソッドのテスト
-     */
     @Test
+    @DisplayName("selectAll メソッドのテスト")
     public void selectAll() {
         // データの取得
         List<UsersEntity> usersList = this.usersMapper.selectAll();
@@ -52,10 +49,8 @@ public class UsersMapperTests {
         assertThat(usersList.get(11).getAccount()).isEqualTo("referencer");
     }
 
-    /**
-     * selectById メソッドのテスト
-     */
     @Test
+    @DisplayName("selectById メソッドのテスト")
     public void selectById() {
         // 「管理者ユーザー」のデータの取得
         UsersEntity adminUser = this.usersMapper.selectById(1L).get();
@@ -100,10 +95,8 @@ public class UsersMapperTests {
         assertThat(notExistsUser).isEmpty();
     }
 
-    /**
-     * selectByAccount メソッドのテスト
-     */
     @Test
+    @DisplayName("selectByAccount メソッドのテスト")
     public void selectByAccount() {
         // 「admin」のデータの取得
         UsersEntity adminUser = this.usersMapper.selectByAccount("admin").get();
@@ -124,10 +117,8 @@ public class UsersMapperTests {
         assertThat(notExistsUser).isEmpty();
     }
 
-    /**
-     * insertUser メソッドのテスト
-     */
     @Test
+    @DisplayName("insertUser メソッドのテスト")
     public void insertUser() {
         // INSERTするusersデータ
         var addUser = new UsersEntity();

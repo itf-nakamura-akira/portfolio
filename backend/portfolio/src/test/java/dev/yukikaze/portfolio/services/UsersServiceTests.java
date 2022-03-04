@@ -3,6 +3,7 @@ package dev.yukikaze.portfolio.services;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.List;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
@@ -10,19 +11,15 @@ import dev.yukikaze.portfolio.entities.UsersEntity;
 import dev.yukikaze.portfolio.enums.UsersPermission;
 import dev.yukikaze.portfolio.mappers.UsersMapperMock;
 
-/**
- * UsersService のテストコード
- */
+@DisplayName("UsersService のテストコード")
 public class UsersServiceTests {
     /**
      * UsersService
      */
     private static final UsersService usersService = new UsersService(new UsersMapperMock());
 
-    /**
-     * getUsersAll メソッドのテスト
-     */
     @Test
+    @DisplayName("getUsersAll メソッドのテスト")
     public void getUsersAll() {
         // ユーザーデータの取得
         List<UsersEntity> usersList = usersService.getUsersAll();
@@ -45,10 +42,8 @@ public class UsersServiceTests {
         assertThat(usersList.get(11).getAccount()).isEqualTo("referencer");
     }
 
-    /**
-     * getUserById メソッドのテスト
-     */
     @Test
+    @DisplayName("getUserById メソッドのテスト")
     public void getUserById() {
         // 「管理者ユーザー」の指定
         UsersEntity adminUser = usersService.getUserById(1L);
@@ -71,10 +66,8 @@ public class UsersServiceTests {
         assertThat(e.getReason()).isEqualTo("存在しないユーザーIDが指定されました。");
     }
 
-    /**
-     * saveUser メソッドのテスト
-     */
     @Test
+    @DisplayName("saveUser メソッドのテスト")
     public void saveUser() {
         // 追加するデータ
         String assertAccount = "test-user";
