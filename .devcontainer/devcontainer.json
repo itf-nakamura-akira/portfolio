@@ -6,37 +6,7 @@
     "service": "portfolio",
     "workspaceFolder": "/workspace",
     // Set *default* container specific settings.json values on container create.
-    "settings": {
-        "[typescript]": {
-            "editor.codeActionsOnSave": {
-                "source.organizeImports": true
-            }
-        },
-        "typescript.referencesCodeLens.enabled": true,
-        "typescript.implementationsCodeLens.enabled": true,
-        "javascript.referencesCodeLens.enabled": true,
-        "workbench.colorCustomizations": {
-            "activityBar.background": "#fff9ab",
-            "activityBar.foreground": "#222",
-        },
-        "rest-client.environmentVariables": {
-            "$shared": {
-                "host": "localhost"
-            }
-        },
-        "[java]": {
-            "editor.formatOnSave": true,
-            "editor.formatOnPaste": true,
-        },
-        "java.implementationsCodeLens.enabled": true,
-        "java.referencesCodeLens.enabled": true,
-        "java.dependency.packagePresentation": "hierarchical",
-        "java.configuration.updateBuildConfiguration": "automatic",
-        "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
-        "java.format.settings.profile": "GoogleStyle",
-        "java.jdt.ls.vmargs": "-noverify -Xmx2G -XX:+UseG1GC -XX:+UseStringDeduplication -javaagent:\"/root/.vscode-server/extensions/gabrielbb.vscode-lombok-1.0.1/server/lombok.jar\"",
-        "java.checkstyle.configuration": "https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml",
-    },
+    // "settings": {},
     // Add the IDs of extensions you want installed when the container is created.
     "extensions": [
         "angular.ng-template",

@@ -1,12 +1,14 @@
 package dev.yukikaze.portfolio.services;
 
 import java.util.List;
+
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
+
 import dev.yukikaze.portfolio.entities.UsersEntity;
 import dev.yukikaze.portfolio.enums.UsersPermission;
 import dev.yukikaze.portfolio.mappers.UsersMapper;
@@ -24,7 +26,7 @@ public class UsersService {
 
     /**
      * コンストラクター
-     * 
+     *
      * @param usersMapper UsersMapper
      */
     public UsersService(UsersMapper usersMapper) {
@@ -33,7 +35,7 @@ public class UsersService {
 
     /**
      * ユーザーデータを全件取得する
-     * 
+     *
      * @return ユーザーデータ全件
      */
     public List<UsersEntity> getUsersAll() {
@@ -44,7 +46,7 @@ public class UsersService {
 
     /**
      * ユーザーIDを指定してユーザーデータを取得する
-     * 
+     *
      * @param userId ユーザーID
      * 
      * @return ユーザーデータ
@@ -59,12 +61,12 @@ public class UsersService {
 
     /**
      * ユーザーデータを追加する
-     * 
-     * @param account アカウント
-     * @param password パスワード
-     * @param name 表示名
+     *
+     * @param account    アカウント
+     * @param password   パスワード
+     * @param name       表示名
      * @param permission ユーザー権限
-     * @param isEnabled 有効フラグ
+     * @param isEnabled  有効フラグ
      * 
      * @return 追加したユーザーのデータ
      */
@@ -90,12 +92,12 @@ public class UsersService {
 
     /**
      * ユーザーデータを更新する(パスワードは除く)
-     * 
-     * @param id ID
-     * @param account アカウント
-     * @param name 表示名
+     *
+     * @param id         ID
+     * @param account    アカウント
+     * @param name       表示名
      * @param permission ユーザー権限
-     * @param isEnabled 有効フラグ
+     * @param isEnabled  有効フラグ
      * 
      * @return 更新したユーザーのデータ
      */
@@ -111,7 +113,7 @@ public class UsersService {
 
     /**
      * ユーザーデータを削除する
-     * 
+     *
      * @param id ID
      */
     public void deleteUser(Long id) {
@@ -123,7 +125,7 @@ public class UsersService {
 
     /**
      * ハッシュ化したパスワード文字列を取得する
-     * 
+     *
      * @param password 元のパスワード文字列
      * 
      * @return ハッシュ化したパスワード文字列

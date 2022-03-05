@@ -1,0 +1,28 @@
+{
+    "[typescript]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        }
+    },
+    "typescript.referencesCodeLens.enabled": true,
+    "typescript.implementationsCodeLens.enabled": true,
+    "javascript.referencesCodeLens.enabled": true,
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#fff9ab",
+        "activityBar.foreground": "#222",
+    },
+    "[java]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnPaste": true,
+    },
+    "java.implementationsCodeLens.enabled": true,
+    "java.referencesCodeLens.enabled": true,
+    "java.dependency.packagePresentation": "hierarchical",
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.format.settings.url": "${workspaceFolder}/.vscode/eclipse-java-google-style.xml",
+    "java.format.settings.profile": "GoogleStyle",
+    "java.jdt.ls.vmargs": "-noverify -Xmx2G -XX:+UseG1GC -XX:+UseStringDeduplication -javaagent:\"/root/.vscode-server/extensions/gabrielbb.vscode-lombok-1.0.1/server/lombok.jar\"",
+    "java.checkstyle.configuration": "${workspaceFolder}/.vscode/google_checks.xml",
+    "java.checkstyle.version": "10.0",
+    "editor.detectIndentation": false,
+}
