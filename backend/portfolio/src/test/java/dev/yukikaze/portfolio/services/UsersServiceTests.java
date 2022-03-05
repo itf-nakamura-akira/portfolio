@@ -25,6 +25,9 @@ public class UsersServiceTests {
      */
     private UsersService usersService;
 
+    /**
+     * 初期化
+     */
     @BeforeEach
     public void beforeEach() {
         this.usersService = new UsersService(new UsersMapperMock());
@@ -79,10 +82,10 @@ public class UsersServiceTests {
     }
 
     @Test
-    @DisplayName("addUser メソッドのテスト")
-    public void addUser() {
+    @DisplayName("registUser メソッドのテスト")
+    public void registUser() {
         // ユーザーデータの追加
-        UsersEntity addedUser = this.usersService.addUser("test-user", "パスワードハッシュ",
+        UsersEntity addedUser = this.usersService.registUser("test-user", "パスワードハッシュ",
                 "テストユーザー", UsersPermission.Admin, true);
 
         // 追加したデータの取得
@@ -99,7 +102,7 @@ public class UsersServiceTests {
 
         // 既に登録済みのアカウントの挿入
         ResponseStatusException e = assertThrows(ResponseStatusException.class,
-                () -> this.usersService.addUser("admin", "パスワードハッシュ", "テストユーザー",
+                () -> this.usersService.registUser("admin", "パスワードハッシュ", "テストユーザー",
                         UsersPermission.Admin, true));
 
         // 例外の確認
@@ -146,6 +149,14 @@ public class UsersServiceTests {
         // 例外の確認
         assertThat(e.getStatus()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
         assertThat(e.getReason()).isEqualTo("更新対象のデータが見つかりませんでした。");
+
+        // 既に登録済みのアカウントに更新
+        e = assertThrows(ResponseStatusException.class,
+                () -> this.usersService.updateUser(1L, "kawakami", "管理者ユーザー", UsersPermission.Admin, true));
+
+        // 例外の確認
+        assertThat(e.getStatus()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
+        assertThat(e.getReason()).isEqualTo("「kawakami」というユーザーは既に存在しています。");
     }
 
     @Test
@@ -164,6 +175,6 @@ public class UsersServiceTests {
 
         // 例外の確認
         assertThat(e.getStatus()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
-        assertThat(e.getReason()).isEqualTo("削除対象のデータが見つかりませんでした。");
+        assertThat(e.getReason()).isEqualTo("対象のデータは既に削除されています。");
     }
 }

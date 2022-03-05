@@ -111,11 +111,17 @@ public class UsersMapperMock implements UsersMapper {
      */
     public boolean updateUser(Long id, String account, String name, UsersPermission permission,
             Boolean isEnabled) {
+        // 更新対象の取得
         Optional<UsersEntity> target = this.mockData.stream()
                 .filter(row -> row.getId().equals(id)).findFirst();
 
         if (target.isEmpty()) {
             return false;
+        }
+
+        // users.accountが被っていないか
+        if (this.mockData.stream().anyMatch(row -> !row.getId().equals(id) && row.getAccount().equals(account))) {
+            throw new DuplicateKeyException("");
         }
 
         target.get().setAccount(account);

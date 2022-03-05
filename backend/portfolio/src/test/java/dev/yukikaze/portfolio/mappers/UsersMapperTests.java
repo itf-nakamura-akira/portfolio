@@ -209,6 +209,13 @@ public class UsersMapperTests {
 
         // 存在しないIDの更新
         assertThat(this.usersMapper.updateUser(-1L, "", "", UsersPermission.Admin, true)).isFalse();
+
+        // データの更新(users.accountによる一意性エラー)
+        assertThrows(DuplicateKeyException.class, () -> {
+            this.usersMapper.updateUser(1L, "kawakami",
+                    "管理者ユーザー",
+                    UsersPermission.Admin, true);
+        });
     }
 
     @Test

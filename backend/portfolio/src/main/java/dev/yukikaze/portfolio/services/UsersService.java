@@ -70,7 +70,7 @@ public class UsersService {
      * 
      * @return 追加したユーザーのデータ
      */
-    public UsersEntity addUser(String account, String password, String name,
+    public UsersEntity registUser(String account, String password, String name,
             UsersPermission permission, Boolean isEnabled) {
         String hashedPassword = this.getHashedPassword(password);
         var addUser = new UsersEntity();
@@ -103,9 +103,14 @@ public class UsersService {
      */
     public UsersEntity updateUser(Long id, String account, String name, UsersPermission permission,
             Boolean isEnabled) {
-        if (!this.usersMapper.updateUser(id, account, name, permission, isEnabled)) {
+        try {
+            if (!this.usersMapper.updateUser(id, account, name, permission, isEnabled)) {
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                        "更新対象のデータが見つかりませんでした。");
+            }
+        } catch (DuplicateKeyException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "更新対象のデータが見つかりませんでした。");
+                    "「" + account + "」というユーザーは既に存在しています。");
         }
 
         return new UsersEntity(id, account, "", name, permission, isEnabled);
@@ -119,7 +124,7 @@ public class UsersService {
     public void deleteUser(Long id) {
         if (!this.usersMapper.deleteUser(id)) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "削除対象のデータが見つかりませんでした。");
+                    "対象のデータは既に削除されています。");
         }
     }
 
