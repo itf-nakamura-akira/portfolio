@@ -1,0 +1,29 @@
+{
+    "properties": [
+        {
+            "name": "app.cookie.secure",
+            "type": "java.lang.String",
+            "description": "CookieのSecureプロパティー"
+        },
+        {
+            "name": "app.cookie.domain",
+            "type": "java.lang.String",
+            "description": "Cookieのdomainプロパティー"
+        },
+        {
+            "name": "app.jwt.secret",
+            "type": "java.lang.String",
+            "description": "JWTのセキュリティーキー"
+        },
+        {
+            "name": "app.jwt.exp",
+            "type": "java.lang.String",
+            "description": "JWTの有効期限(日)"
+        },
+        {
+            "name": "app.cors.allowed-origins",
+            "type": "java.lang.String",
+            "description": "CORSで許可するリクエスト元"
+        }
+    ]
+}
