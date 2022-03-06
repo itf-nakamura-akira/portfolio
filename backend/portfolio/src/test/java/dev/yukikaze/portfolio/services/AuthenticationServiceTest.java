@@ -57,6 +57,11 @@ public class AuthenticationServiceTest {
         assertEquals(result.get().getId(), 12L);
         assertEquals(result.get().getPermission(), UsersPermission.Referencer);
 
+        // 間違った認証情報のテスト(存在しないユーザー)
+        result = this.authenticationService.verify("invalid", "referencer");
+
+        assertTrue(result.isEmpty());
+
         // 間違った認証情報のテスト(ユーザーは有効)
         result = this.authenticationService.verify("referencer", "invalid");
 
