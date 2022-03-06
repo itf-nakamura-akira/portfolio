@@ -34,6 +34,10 @@ RUN curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 RUN sudo apt-get install -y nodejs
 RUN npm update -g npm
 
+# Angular
+RUN npm install -g @angular/cli@13.2.5
+RUN npm install -g ts-node@10.7.0
+
 # Java
 RUN wget -O- https://apt.corretto.aws/corretto.key | sudo apt-key add -
 RUN sudo add-apt-repository 'deb https://apt.corretto.aws stable main'
