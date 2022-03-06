@@ -61,11 +61,7 @@ public class CookieUtilsTest {
         this.cookieUtils.setCookie(response, 1L, UsersPermission.Admin);
 
         // Cookieの確認
-        String cookie = response.getHeader("Set-Cookie");
-        Pattern pattern = Pattern.compile("jwt=(.*?);");
-        Matcher matcher = pattern.matcher(cookie);
-        matcher.find();
-        String jwtStr = matcher.group().replaceFirst("^jwt=", "").replaceFirst(";$", "");
+        String jwtStr = cookieStrFromCookie(response, "jwt");
         Optional<JwtPayload> payload = this.jwtUtils.verifyToken(jwtStr);
 
         assertTrue(payload.isPresent());
@@ -92,18 +88,45 @@ public class CookieUtilsTest {
         this.cookieUtils.delCookie(response);
 
         // Cookieの確認(有効期限が切れていること)
-        String cookie = response.getHeader("Set-Cookie");
-        Pattern pattern = Pattern.compile("Expires=(.*?);");
-        Matcher matcher = pattern.matcher(cookie);
-        matcher.find();
-        String expStr = matcher.group().replaceFirst("^Expires=", "").replaceFirst(";$", "");
-        DateTimeFormatter expFormat = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US)
-                .withZone(ZoneId.of("GMT"));
-        Date exp = Date.from(ZonedDateTime.of(LocalDateTime.parse(expStr, expFormat), ZoneId.of("GMT"))
-                .toInstant());
+        Date exp = getExpiresFromCookie(response);
         Date now = Date.from(ZonedDateTime.of(LocalDateTime.now(ZoneId.of("GMT")), ZoneId.of("GMT"))
                 .toInstant());
 
         assertTrue(exp.getTime() < now.getTime());
+    }
+
+    /**
+     * レスポンスに含まれるCookieからExpiresを取り出す
+     *
+     * @param response Cookieがセットされたレスポンス
+     * 
+     * @return CookieのExpires
+     */
+    public static Date getExpiresFromCookie(Response response) {
+        String expStr = cookieStrFromCookie(response, "Expires");
+        DateTimeFormatter expFormat = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US)
+                .withZone(ZoneId.of("GMT"));
+        Date exp = Date.from(ZonedDateTime.of(LocalDateTime.parse(expStr, expFormat), ZoneId.of("GMT"))
+                .toInstant());
+
+        return exp;
+    }
+
+    /**
+     * レスポンスに含まれるCookieから指定されたプロパティーの値を取り出す(String)
+     *
+     * @param response       Cookieがセットされたレスポンス
+     * @param targetProperty 取得するプロパティー名
+     *
+     * @return プロパティーの値
+     */
+    public static String cookieStrFromCookie(Response response, String targetProperty) {
+        String cookie = response.getHeader("Set-Cookie");
+        Pattern pattern = Pattern.compile(targetProperty + "=(.*?);");
+        Matcher matcher = pattern.matcher(cookie);
+        matcher.find();
+        String expStr = matcher.group().replaceFirst("^" + targetProperty + "=", "").replaceFirst(";$", "");
+
+        return expStr;
     }
 }
