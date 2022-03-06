@@ -1,4 +1,4 @@
-package dev.yukikaze.portfolio.controllers;
+package dev.yukikaze.portfolio.controllers.masters;
 
 import java.util.List;
 
@@ -126,37 +126,38 @@ public class UsersMasterController {
     /**
      * listメソッドのレスポンス
      */
-    record ListResponse(List<ListUsers> users) {
+    public record ListResponse(List<ListUsers> users) {
     }
 
     /**
      * listメソッドのレスポンス - users
      */
-    record ListUsers(long id, String account, String name, UsersPermission permission, boolean isEnabled) {
+    public record ListUsers(long id, String account, String name, UsersPermission permission, boolean isEnabled) {
     }
 
     /**
      * registメソッドのリクエストボディー
      */
-    record RegistRequestBody(String account, String name, String password,
+    public record RegistRequestBody(String account, String name, String password,
             UsersPermission permission, Boolean isEnabled) {
     }
 
     /**
      * registメソッドのレスポンスボディー
      */
-    record RegistUsersResponse(ListUsers user) {
+    public record RegistUsersResponse(ListUsers user) {
     }
 
     /**
      * updateメソッドのリクエストボディー
      */
-    record UpdateRequestBody(Long id, String account, String name, UsersPermission permission, Boolean isEnabled) {
+    public record UpdateRequestBody(Long id, String account, String name, UsersPermission permission,
+            Boolean isEnabled) {
     }
 
     /**
      * deleteメソッドのリクエストボディー
      */
-    record DeleteRequestBody(Long id) {
+    public record DeleteRequestBody(Long id) {
     }
 }

@@ -13,11 +13,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
-import dev.yukikaze.portfolio.controllers.UsersMasterController.DeleteRequestBody;
-import dev.yukikaze.portfolio.controllers.UsersMasterController.ListResponse;
-import dev.yukikaze.portfolio.controllers.UsersMasterController.ListUsers;
-import dev.yukikaze.portfolio.controllers.UsersMasterController.RegistRequestBody;
-import dev.yukikaze.portfolio.controllers.UsersMasterController.UpdateRequestBody;
+import dev.yukikaze.portfolio.controllers.masters.UsersMasterController;
+import dev.yukikaze.portfolio.controllers.masters.UsersMasterController.DeleteRequestBody;
+import dev.yukikaze.portfolio.controllers.masters.UsersMasterController.ListResponse;
+import dev.yukikaze.portfolio.controllers.masters.UsersMasterController.ListUsers;
+import dev.yukikaze.portfolio.controllers.masters.UsersMasterController.RegistRequestBody;
+import dev.yukikaze.portfolio.controllers.masters.UsersMasterController.UpdateRequestBody;
 import dev.yukikaze.portfolio.entities.UsersEntity;
 import dev.yukikaze.portfolio.enums.UsersPermission;
 import dev.yukikaze.portfolio.mappers.UsersMapper;
