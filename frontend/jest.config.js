@@ -1,6 +1,6 @@
 // jest.config.js
 module.exports = {
     preset: 'jest-preset-angular',
-    setupFilesAfterEnv: ['<rootDir>/setupJest.ts'],
+    setupFilesAfterEnv: ['<rootDir>/src/setup-jest.ts'],
     globalSetup: 'jest-preset-angular/global-setup',
 };
