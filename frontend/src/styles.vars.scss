@@ -1,0 +1,24 @@
+// パレット確認用ファイル
+@use '../node_modules/@angular/material/core/theming/_palette';
+@use '@angular/material' as mat;
+
+$portfolio-primary: mat.define-palette(mat.$teal-palette);
+$portfolio-accent: mat.define-palette(mat.$amber-palette);
+$portfolio-warn: mat.define-palette(mat.$red-palette);
+$portfolio-theme: mat.define-light-theme(
+    (
+        color: (
+            primary: $portfolio-primary,
+            accent: $portfolio-accent,
+            warn: $portfolio-warn,
+        ),
+    )
+);
+
+// app
+@mixin line-clamp($line) {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: $line;
+    -webkit-box-orient: vertical;
+}
