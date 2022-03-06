@@ -27,7 +27,7 @@ import dev.yukikaze.portfolio.enums.UsersPermission;
 @ActiveProfiles("test")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DisplayName("UsersMapper のテストコード")
-public class UsersMapperTests {
+public class UsersMapperTest {
     /**
      * UsersMapper
      */

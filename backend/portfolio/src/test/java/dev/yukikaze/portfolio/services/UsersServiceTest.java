@@ -19,7 +19,7 @@ import dev.yukikaze.portfolio.mappers.UsersMapperMock;
  * UsersService のテストコード
  */
 @DisplayName("UsersService のテストコード")
-public class UsersServiceTests {
+public class UsersServiceTest {
     /**
      * UsersService
      */
