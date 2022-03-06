@@ -4,11 +4,22 @@
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
-        "build": "ng build",
+        "build": "rm -rf dist && ng build",
         "watch": "ng build --watch --configuration development",
-        "test": "ng test"
+        "test": "ng test",
+        "prettier": "prettier --write ."
     },
     "private": true,
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*": [
+            "prettier --write"
+        ]
+    },
     "dependencies": {
         "@angular/animations": "~13.2.0",
         "@angular/common": "~13.2.0",
@@ -28,12 +39,16 @@
         "@angular/compiler-cli": "~13.2.0",
         "@types/jasmine": "~3.10.0",
         "@types/node": "^12.11.1",
+        "husky": "4.3.x",
         "jasmine-core": "~4.0.0",
         "karma": "~6.3.0",
         "karma-chrome-launcher": "~3.1.0",
         "karma-coverage": "~2.1.0",
         "karma-jasmine": "~4.0.0",
         "karma-jasmine-html-reporter": "~1.7.0",
+        "lint-staged": "12.0.x",
+        "prettier": "2.4.x",
+        "pretty-quick": "3.1.x",
         "typescript": "~4.5.2"
     }
 }
