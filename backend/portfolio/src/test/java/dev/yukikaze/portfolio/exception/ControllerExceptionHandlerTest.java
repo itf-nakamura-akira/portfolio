@@ -26,6 +26,9 @@ public class ControllerExceptionHandlerTest {
      */
     private ControllerExceptionHandler controllerExceptionHandler;
 
+    /**
+     * 初期化
+     */
     @BeforeEach
     public void beforeAll() {
         this.controllerExceptionHandler = new ControllerExceptionHandler();

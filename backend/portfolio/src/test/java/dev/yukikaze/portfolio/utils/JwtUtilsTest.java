@@ -20,9 +20,9 @@ import dev.yukikaze.portfolio.enums.UsersPermission;
 import dev.yukikaze.portfolio.objects.JwtPayload;
 
 /**
- * JwtUtilsTest のテストコード
+ * JwtUtils のテストコード
  */
-@DisplayName("JwtUtilsTest のテストコード")
+@DisplayName("JwtUtils のテストコード")
 public class JwtUtilsTest {
     @Test
     @DisplayName("generateToken メソッドのテスト")
