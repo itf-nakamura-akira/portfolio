@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
-import dev.yukikaze.portfolio.controllers.masters.UsersMasterController;
 import dev.yukikaze.portfolio.controllers.masters.UsersMasterController.DeleteRequestBody;
 import dev.yukikaze.portfolio.controllers.masters.UsersMasterController.ListResponse;
 import dev.yukikaze.portfolio.controllers.masters.UsersMasterController.ListUsers;
