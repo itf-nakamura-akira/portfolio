@@ -27,7 +27,7 @@ public class JwtUtilsTest {
     @Test
     @DisplayName("generateToken メソッドのテスト")
     public void generateToken() {
-        JwtUtils jwtUtils = this.generateJwtUtils("7", "asdf1234");
+        JwtUtils jwtUtils = generateJwtUtils("7", "asdf1234");
         String token;
         JwtPayload jwtPayload;
 
@@ -69,7 +69,7 @@ public class JwtUtilsTest {
     @Test
     @DisplayName("verifyToken メソッドのテスト")
     public void verifyToken() {
-        JwtUtils jwtUtils = this.generateJwtUtils("7", "asdf1234");
+        JwtUtils jwtUtils = generateJwtUtils("7", "asdf1234");
         String token;
         Optional<JwtPayload> jwtPayload;
 
@@ -80,14 +80,14 @@ public class JwtUtilsTest {
         assertTrue(jwtPayload.isPresent());
 
         // 期限が過ぎたトークンが検証に失敗するか
-        jwtUtils = this.generateJwtUtils("-1", "asdf1234");
+        jwtUtils = generateJwtUtils("-1", "asdf1234");
         token = jwtUtils.generateToken(1L, UsersPermission.Admin);
         jwtPayload = jwtUtils.verifyToken(token);
 
         assertNull(jwtPayload);
 
         // 改ざんされたトークンが検証に失敗するか(ユーザー権限の改ざん)
-        jwtUtils = this.generateJwtUtils("7", "asdf1234");
+        jwtUtils = generateJwtUtils("7", "asdf1234");
         token = jwtUtils.generateToken(3L, UsersPermission.User);
         String[] splitedToken = token.split(Pattern.quote("."));
 
@@ -104,7 +104,7 @@ public class JwtUtilsTest {
         assertNull(jwtPayload);
 
         // 改ざんされたトークンが検証に失敗するか(ユーザーIDの改ざん)
-        jwtUtils = this.generateJwtUtils("7", "asdf1234");
+        jwtUtils = generateJwtUtils("7", "asdf1234");
         token = jwtUtils.generateToken(3L, UsersPermission.User);
         splitedToken = token.split(Pattern.quote("."));
 
@@ -121,7 +121,7 @@ public class JwtUtilsTest {
         assertNull(jwtPayload);
 
         // 改ざんされたトークンが検証に失敗するか(有効期限の改ざん)
-        jwtUtils = this.generateJwtUtils("7", "asdf1234");
+        jwtUtils = generateJwtUtils("7", "asdf1234");
         token = jwtUtils.generateToken(3L, UsersPermission.User);
         splitedToken = token.split(Pattern.quote("."));
 
@@ -146,7 +146,7 @@ public class JwtUtilsTest {
      *
      * @return JwtUtils
      */
-    private JwtUtils generateJwtUtils(String exp, String secret) {
+    public static JwtUtils generateJwtUtils(String exp, String secret) {
         var appProperties = new AppProperties();
         var jwtProperties = new AppProperties.Jwt();
         jwtProperties.setExp(exp);

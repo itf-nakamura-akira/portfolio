@@ -54,7 +54,7 @@ public class UsersService {
     public UsersEntity getUserById(Long userId) {
         UsersEntity user = this.usersMapper.selectById(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                        "存在しないユーザーIDが指定されました。"));
+                        "ユーザー情報の取得に失敗しました。"));
 
         return user;
     }

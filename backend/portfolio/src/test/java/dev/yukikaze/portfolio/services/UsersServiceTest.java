@@ -77,7 +77,7 @@ public class UsersServiceTest {
 
         // 例外の確認
         assertEquals(e.getStatus(), HttpStatus.INTERNAL_SERVER_ERROR);
-        assertEquals(e.getReason(), "存在しないユーザーIDが指定されました。");
+        assertEquals(e.getReason(), "ユーザー情報の取得に失敗しました。");
     }
 
     @Test
