@@ -25,4 +25,7 @@
     "java.checkstyle.configuration": "${workspaceFolder}/.vscode/google_checks.xml",
     "java.checkstyle.version": "10.0",
     "editor.detectIndentation": false,
+    "eslint.workingDirectories": [
+        "./frontend"
+    ],
 }
