@@ -80,6 +80,17 @@
                     "options": {
                         "browserTarget": "portfolio:build"
                     }
+                },
+                "e2e": {
+                    "builder": "@cypress/schematic:cypress",
+                    "options": {
+                        "devServerTarget": "portfolio:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "portfolio:serve:production"
+                        }
+                    }
                 }
             }
         }
