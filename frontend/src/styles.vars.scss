@@ -2,6 +2,7 @@
 @use '../node_modules/@angular/material/core/theming/_palette';
 @use '@angular/material' as mat;
 
+// material
 $portfolio-primary: mat.define-palette(mat.$teal-palette);
 $portfolio-accent: mat.define-palette(mat.$amber-palette);
 $portfolio-warn: mat.define-palette(mat.$red-palette);
@@ -15,7 +16,15 @@ $portfolio-theme: mat.define-light-theme(
     )
 );
 
+$mat-primary: mat.get-color-from-palette($portfolio-primary);
+$mat-accent: mat.get-color-from-palette($portfolio-accent);
+$mat-warn: mat.get-color-from-palette($portfolio-warn);
+
 // app
+$header-height: 64px;
+$side-nav-width: 240px;
+$side-nav-animation: all 250ms 0s ease;
+
 @mixin line-clamp($line) {
     display: -webkit-box;
     overflow: hidden;

@@ -1,0 +1,26 @@
+@use '@angular/material' as mat;
+@use '../../../../../../styles.vars' as vars;
+
+.anker {
+    width: 100%;
+
+    .anker-contents {
+        display: flex;
+        align-items: center;
+        width: vars.$side-nav-width;
+        height: 60px;
+
+        .icon {
+            margin: 0 16px;
+        }
+
+        &:not(.selected) {
+            color: mat.get-color-from-palette(mat.$light-theme-foreground-palette, secondary-text);
+        }
+
+        &.selected {
+            color: mat.get-color-from-palette(vars.$portfolio-primary, A700);
+            background-color: mat.get-color-from-palette(vars.$portfolio-primary, A700, 0.1);
+        }
+    }
+}

@@ -1,0 +1,18 @@
+@use '../../../../styles.vars' as vars;
+
+:host {
+    height: 100vh;
+
+    .header {
+        display: block;
+        width: 100%;
+        height: vars.$header-height;
+        position: fixed;
+        z-index: 9999;
+    }
+
+    .contents {
+        display: block;
+        flex-grow: 1;
+    }
+}

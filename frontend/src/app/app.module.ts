@@ -5,9 +5,11 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LayoutModule } from './components/layouts/layout.module';
+import { UsersMasterComponent } from './components/pages/users-master/users-master.component';
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, UsersMasterComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -18,6 +20,7 @@ import { AppComponent } from './app.component';
             // or after 30 seconds (whichever comes first).
             registrationStrategy: 'registerWhenStable:30000',
         }),
+        LayoutModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

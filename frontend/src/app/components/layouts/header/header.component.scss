@@ -1,0 +1,21 @@
+@use '../../../../styles.vars' as vars;
+
+.mat-toolbar-single-row {
+    padding-right: 0;
+    height: vars.$header-height;
+
+    .app-title {
+        margin-left: 8px;
+        font-size: 32px;
+        font-family: 'Noto Serif', serif;
+        letter-spacing: 2px;
+
+        &:first-letter {
+            color: vars.$mat-accent;
+        }
+    }
+
+    .spacer {
+        flex-grow: 1;
+    }
+}

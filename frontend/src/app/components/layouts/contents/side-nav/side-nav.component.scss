@@ -1,0 +1,38 @@
+@use '../../../../../styles.vars' as vars;
+
+.container {
+    display: flex;
+    justify-content: center;
+
+    .nav {
+        position: fixed;
+        left: 0;
+        top: vars.$header-height;
+        transition: vars.$side-nav-animation;
+        height: calc(100vh - vars.$header-height);
+        overflow-y: scroll;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    .main {
+        flex-basis: calc(100% - vars.$side-nav-width);
+        padding-left: vars.$side-nav-width;
+        padding-top: vars.$header-height;
+        transition: vars.$side-nav-animation;
+    }
+
+    &:not(.menu-is-open) {
+        .nav {
+            left: calc(-1 * vars.$side-nav-width);
+        }
+
+        .main {
+            flex-basis: 100%;
+            padding-left: 0;
+        }
+    }
+}
