@@ -13,6 +13,7 @@
         "dbaeumer.vscode-eslint",
         "eamodio.gitlens",
         "GabrielBB.vscode-lombok",
+        "humao.rest-client",
         "redhat.java",
         "redhat.vscode-xml",
         "shengchen.vscode-checkstyle",
