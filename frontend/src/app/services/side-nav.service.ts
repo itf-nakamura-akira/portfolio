@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { LocalStorageKey } from '../enums/LocalStorageKey';
+import { LocalStorageKey } from '../enums/localStorageKey';
 import { LocalStorageService } from './local-storage.service';
 
 /**

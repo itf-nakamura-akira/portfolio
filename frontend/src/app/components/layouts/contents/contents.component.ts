@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { tap } from 'rxjs';
+import { AppService } from 'src/app/app.service';
 
 /**
  * コンテンツを配置するレイアウトComponent
@@ -10,7 +13,20 @@ import { Component } from '@angular/core';
 })
 export class ContentsComponent {
     /**
-     * コンストラクター
+     * 認証済み情報
      */
-    constructor() {}
+    isAuthorized$ = this.appService.isAuthorized$.pipe(
+        tap((isAuthorized) => {
+            if (!isAuthorized) {
+                this.router.navigateByUrl('login');
+            }
+        }),
+    );
+
+    /**
+     * コンストラクター
+     *
+     * @param appService AppService
+     */
+    constructor(private router: Router, private appService: AppService) {}
 }
