@@ -77,7 +77,7 @@ public class JwtUtils {
 
             return Optional.ofNullable(payload);
         } catch (Exception exception) {
-            return null;
+            return Optional.ofNullable(null);
         }
     }
 }

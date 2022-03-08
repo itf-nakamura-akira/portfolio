@@ -42,7 +42,9 @@ public class LoginController {
     /**
      * 認証処理
      *
-     * @param body 認証情報
+     * @param body     認証情報
+     * 
+     * @param response レスポンスデータ
      */
     @NonAuth
     @PostMapping("signIn")

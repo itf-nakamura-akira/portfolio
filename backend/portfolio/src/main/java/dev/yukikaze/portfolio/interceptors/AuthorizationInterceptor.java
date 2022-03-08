@@ -125,7 +125,7 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
 
             // JWTトークンが改変されていないか検証
             JwtPayload jwtPayload = this.jwtUtils.verifyToken(jwtCookie.getValue())
-                    .orElseThrow(() -> new Exception());
+                    .orElseThrow(Exception::new);
 
             // @PrePersistなどController以外から値を取得したいとき用
             RequestAttributes currentAttributes = RequestContextHolder.currentRequestAttributes();
@@ -171,7 +171,7 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
 
             // JWTトークンが改変されていないか検証
             JwtPayload jwtPayload = this.jwtUtils.verifyToken(jwtCookie.getValue())
-                    .orElseThrow(() -> new Exception());
+                    .orElseThrow(Exception::new);
 
             // アノテーションで指定された権限を所持しているか検証
             UsersPermission cookiePermission = jwtPayload.permission();

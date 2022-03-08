@@ -1,7 +1,6 @@
 package dev.yukikaze.portfolio.utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.charset.StandardCharsets;
@@ -84,7 +83,7 @@ public class JwtUtilsTest {
         token = jwtUtils.generateToken(1L, UsersPermission.Admin);
         jwtPayload = jwtUtils.verifyToken(token);
 
-        assertNull(jwtPayload);
+        assertTrue(jwtPayload.isEmpty());
 
         // 改ざんされたトークンが検証に失敗するか(ユーザー権限の改ざん)
         jwtUtils = generateJwtUtils("7", "asdf1234");
@@ -101,7 +100,7 @@ public class JwtUtilsTest {
 
         jwtPayload = jwtUtils.verifyToken(splitedToken[0] + "." + encoded + "." + splitedToken[2]);
 
-        assertNull(jwtPayload);
+        assertTrue(jwtPayload.isEmpty());
 
         // 改ざんされたトークンが検証に失敗するか(ユーザーIDの改ざん)
         jwtUtils = generateJwtUtils("7", "asdf1234");
@@ -118,7 +117,7 @@ public class JwtUtilsTest {
 
         jwtPayload = jwtUtils.verifyToken(splitedToken[0] + "." + encoded + "." + splitedToken[2]);
 
-        assertNull(jwtPayload);
+        assertTrue(jwtPayload.isEmpty());
 
         // 改ざんされたトークンが検証に失敗するか(有効期限の改ざん)
         jwtUtils = generateJwtUtils("7", "asdf1234");
@@ -135,7 +134,7 @@ public class JwtUtilsTest {
 
         jwtPayload = jwtUtils.verifyToken(splitedToken[0] + "." + encoded + "." + splitedToken[2]);
 
-        assertNull(jwtPayload);
+        assertTrue(jwtPayload.isEmpty());
     }
 
     /**
