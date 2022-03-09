@@ -8,8 +8,8 @@
     "typescript.implementationsCodeLens.enabled": true,
     "javascript.referencesCodeLens.enabled": true,
     "workbench.colorCustomizations": {
-        "activityBar.background": "#fff9ab",
-        "activityBar.foreground": "#222",
+        "activityBar.background": "#009688",
+        "activityBar.foreground": "#ffffff",
     },
     "[java]": {
         "editor.formatOnSave": true,
