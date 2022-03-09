@@ -47,8 +47,8 @@ public class LoginController {
      * @param response レスポンスデータ
      */
     @NonAuth
-    @PostMapping("signIn")
-    public void signIn(@RequestBody SignInRequestBody body, HttpServletResponse response) {
+    @PostMapping
+    public void login(@RequestBody LoginRequestBody body, HttpServletResponse response) {
         UsersEntity user = this.authenticationService.verify(body.account(), body.password()).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "ログインに失敗しました。"));
 
@@ -57,8 +57,8 @@ public class LoginController {
     }
 
     /**
-     * signInメソッドのリクエストボディー
+     * login メソッドのリクエストボディー
      */
-    public record SignInRequestBody(String account, String password) {
+    public record LoginRequestBody(String account, String password) {
     }
 }

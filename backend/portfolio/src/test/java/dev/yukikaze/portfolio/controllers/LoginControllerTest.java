@@ -15,7 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 import dev.yukikaze.portfolio.AppProperties;
-import dev.yukikaze.portfolio.controllers.LoginController.SignInRequestBody;
+import dev.yukikaze.portfolio.controllers.LoginController.LoginRequestBody;
 import dev.yukikaze.portfolio.enums.UsersPermission;
 import dev.yukikaze.portfolio.mappers.UsersMapper;
 import dev.yukikaze.portfolio.mappers.UsersMapperMock;
@@ -72,14 +72,14 @@ public class LoginControllerTest {
     }
 
     @Test
-    @DisplayName("signIn メソッドのテスト")
-    public void signIn() {
+    @DisplayName("login メソッドのテスト")
+    public void login() {
         // 正しい認証情報による認証
-        var body = new SignInRequestBody("admin", "admin");
+        var body = new LoginRequestBody("admin", "admin");
         var response = new Response();
         response.setCoyoteResponse(new org.apache.coyote.Response());
 
-        this.loginController.signIn(body, response);
+        this.loginController.login(body, response);
 
         // Cookieの確認(Admin)
         String jwtStr = CookieUtilsTest.cookieStrFromCookie(response, "jwt");
@@ -97,11 +97,11 @@ public class LoginControllerTest {
         assertTrue(sub < 5 * 1000); // 差が5秒以下
 
         // 正しい認証情報による認証
-        body = new SignInRequestBody("imadu", "imadu");
+        body = new LoginRequestBody("imadu", "imadu");
         response = new Response();
         response.setCoyoteResponse(new org.apache.coyote.Response());
 
-        this.loginController.signIn(body, response);
+        this.loginController.login(body, response);
 
         // Cookieの確認(User)
         jwtStr = CookieUtilsTest.cookieStrFromCookie(response, "jwt");
@@ -111,11 +111,11 @@ public class LoginControllerTest {
         assertEquals(payload.get().permission(), UsersPermission.User);
 
         // 正しい認証情報による認証
-        body = new SignInRequestBody("referencer", "referencer");
+        body = new LoginRequestBody("referencer", "referencer");
         response = new Response();
         response.setCoyoteResponse(new org.apache.coyote.Response());
 
-        this.loginController.signIn(body, response);
+        this.loginController.login(body, response);
 
         // Cookieの確認(User)
         jwtStr = CookieUtilsTest.cookieStrFromCookie(response, "jwt");
@@ -126,21 +126,21 @@ public class LoginControllerTest {
 
         // 間違った認証情報による認証(存在しないユーザー)
         ResponseStatusException e = assertThrows(ResponseStatusException.class,
-                () -> this.loginController.signIn(new SignInRequestBody("invalid", "referencer"), new Response()));
+                () -> this.loginController.login(new LoginRequestBody("invalid", "referencer"), new Response()));
 
         assertEquals(HttpStatus.UNAUTHORIZED, e.getStatus());
         assertEquals("ログインに失敗しました。", e.getReason());
 
         // 間違った認証情報による認証(間違ったパスワード)
         e = assertThrows(ResponseStatusException.class,
-                () -> this.loginController.signIn(new SignInRequestBody("referencer", "invalid"), new Response()));
+                () -> this.loginController.login(new LoginRequestBody("referencer", "invalid"), new Response()));
 
         assertEquals(HttpStatus.UNAUTHORIZED, e.getStatus());
         assertEquals("ログインに失敗しました。", e.getReason());
 
         // 無効なユーザーの認証情報による認証
         e = assertThrows(ResponseStatusException.class,
-                () -> this.loginController.signIn(new SignInRequestBody("ichinohe", "ichinohe"), new Response()));
+                () -> this.loginController.login(new LoginRequestBody("ichinohe", "ichinohe"), new Response()));
 
         assertEquals(HttpStatus.UNAUTHORIZED, e.getStatus());
         assertEquals("ログインに失敗しました。", e.getReason());
