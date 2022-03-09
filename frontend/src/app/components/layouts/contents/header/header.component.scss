@@ -1,7 +1,6 @@
 @use '../../../../../styles.vars' as vars;
 
 .mat-toolbar-single-row {
-    padding-right: 0;
     height: vars.$header-height;
 
     .app-title {

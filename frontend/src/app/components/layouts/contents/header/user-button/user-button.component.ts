@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserButtonService } from './user-button.service';
 
 /**
@@ -10,13 +10,20 @@ import { UserButtonService } from './user-button.service';
     styleUrls: ['./user-button.component.scss'],
     providers: [UserButtonService],
 })
-export class UserButtonComponent {
+export class UserButtonComponent implements OnInit {
     /**
      * コンストラクター
      *
      * @param userButtonService UserButtonService
      */
-    constructor(private userButtonService: UserButtonService) {}
+    constructor(public userButtonService: UserButtonService) {}
+
+    /**
+     * 初期化
+     */
+    ngOnInit(): void {
+        this.userButtonService.fetchLoginUserInfo();
+    }
 
     /**
      * ログアウトボタンクリックイベントハンドラー

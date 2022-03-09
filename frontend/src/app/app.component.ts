@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { AppService } from './app.service';
+import { Component } from '@angular/core';
 
 /**
  * Angularアプリケーション
@@ -9,18 +8,9 @@ import { AppService } from './app.service';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
     /**
      * コンストラクター
-     *
-     * @param appService AppService
      */
-    constructor(private appService: AppService) {}
-
-    /**
-     * 初期化
-     */
-    ngOnInit(): void {
-        this.appService.updateIsAuthorized();
-    }
+    constructor() {}
 }

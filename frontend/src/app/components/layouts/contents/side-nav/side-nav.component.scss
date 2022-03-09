@@ -12,6 +12,7 @@
         height: calc(100vh - vars.$header-height);
         overflow-y: scroll;
         scrollbar-width: none;
+        background-color: map-get(vars.$mat-background, dialog);
 
         &::-webkit-scrollbar {
             display: none;
@@ -26,6 +27,17 @@
     }
 
     &:not(.menu-is-open) {
+        .nav {
+            left: calc(-1 * vars.$side-nav-width);
+        }
+
+        .main {
+            flex-basis: 100%;
+            padding-left: 0;
+        }
+    }
+
+    &:not(.authorized) {
         .nav {
             left: calc(-1 * vars.$side-nav-width);
         }

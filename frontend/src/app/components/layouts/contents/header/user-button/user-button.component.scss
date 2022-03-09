@@ -1,8 +1,7 @@
 @use '../../../../../../styles.vars' as vars;
 
 .user-button {
-    height: vars.$header-height;
-    width: 160px;
+    max-width: 160px;
 
     .name {
         white-space: normal;

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { AppService } from 'src/app/app.service';
 import { LoginUserResponse, UserButtonHttpService } from './user-button-http.service';
 
 /**
@@ -22,9 +24,11 @@ export class UserButtonService {
     /**
      * コンストラクター
      *
+     * @param router Router
+     * @param appService AppService
      * @param userButtonHttpService UserButtonHttpService
      */
-    constructor(private userButtonHttpService: UserButtonHttpService) {}
+    constructor(private router: Router, private appService: AppService, private userButtonHttpService: UserButtonHttpService) {}
 
     /**
      * ログインユーザー情報を取得する
@@ -37,7 +41,11 @@ export class UserButtonService {
      * ログアウト
      */
     logout(): void {
-        this.userButtonHttpService.logout().subscribe(() => this._loginUserInfo$.next(null));
+        this.userButtonHttpService.logout().subscribe(() => {
+            this.appService.setIsAuthorized(false);
+            this._loginUserInfo$.next(null);
+            this.router.navigateByUrl('login');
+        });
     }
 }
 

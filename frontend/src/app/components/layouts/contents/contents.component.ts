@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { tap } from 'rxjs';
 import { AppService } from 'src/app/app.service';
 
 /**
@@ -13,20 +11,9 @@ import { AppService } from 'src/app/app.service';
 })
 export class ContentsComponent {
     /**
-     * 認証済み情報
-     */
-    isAuthorized$ = this.appService.isAuthorized$.pipe(
-        tap((isAuthorized) => {
-            if (!isAuthorized) {
-                this.router.navigateByUrl('login');
-            }
-        }),
-    );
-
-    /**
      * コンストラクター
      *
      * @param appService AppService
      */
-    constructor(private router: Router, private appService: AppService) {}
+    constructor(public appService: AppService) {}
 }

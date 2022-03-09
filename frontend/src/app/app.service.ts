@@ -29,15 +29,18 @@ export class AppService {
     constructor(private appHttpService: AppHttpService) {}
 
     /**
-     * 認証済み情報を更新する
-     *
-     * @param isLogouted ログアウト済みか
+     * APIを経由してローカルの認証済み情報を更新する
      */
-    updateIsAuthorized(isLogouted: boolean = false): void {
-        if (isLogouted) {
-            this._isAuthorized$.next(false);
-        } else {
-            this.appHttpService.getIsAuthorized().subscribe((response) => this._isAuthorized$.next(response.isAuthorized));
-        }
+    fetchIsAuthorized(): void {
+        this.appHttpService.getIsAuthorized().subscribe((response) => this._isAuthorized$.next(response.isAuthorized));
+    }
+
+    /**
+     * ローカルの認証済み情報を更新する
+     *
+     * @param 更新値
+     */
+    setIsAuthorized(isAuthorized: boolean): void {
+        this._isAuthorized$.next(isAuthorized);
     }
 }

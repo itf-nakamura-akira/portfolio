@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { RouterTestingModule } from '@angular/router/testing';
 import { HeaderComponent } from './header.component';
 import { MenuButtonComponent } from './menu-button/menu-button.component';
 import { UserButtonComponent } from './user-button/user-button.component';
@@ -14,7 +15,7 @@ describe('HeaderComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [HeaderComponent, MenuButtonComponent, UserButtonComponent],
-            imports: [HttpClientModule, MatToolbarModule, MatIconModule, MatMenuModule],
+            imports: [RouterTestingModule, HttpClientModule, MatToolbarModule, MatIconModule, MatMenuModule],
         }).compileComponents();
     });
 

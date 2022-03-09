@@ -19,6 +19,8 @@ $portfolio-theme: mat.define-light-theme(
 $mat-primary: mat.get-color-from-palette($portfolio-primary);
 $mat-accent: mat.get-color-from-palette($portfolio-accent);
 $mat-warn: mat.get-color-from-palette($portfolio-warn);
+$mat-foreground: map-get($portfolio-theme, foreground);
+$mat-background: map-get($portfolio-theme, background);
 
 // app
 $header-height: 64px;

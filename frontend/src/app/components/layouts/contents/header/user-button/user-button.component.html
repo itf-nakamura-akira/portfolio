@@ -1,7 +1,9 @@
-<button mat-button class="user-button" title="login-user" [matMenuTriggerFor]="menu">
-    <span class="name">ログイン</span>
-</button>
+<ng-container *ngIf="userButtonService.loginUserInfo$ | async as loginUserInfo">
+    <button mat-stroked-button class="user-button" [title]="loginUserInfo.account" [matMenuTriggerFor]="menu">
+        <span class="name">{{ loginUserInfo.name }}</span>
+    </button>
+</ng-container>
 
 <mat-menu #menu="matMenu" xPosition="before">
-    <button mat-menu-item>ログアウト</button>
+    <button mat-menu-item (click)="logout()">ログアウト</button>
 </mat-menu>
