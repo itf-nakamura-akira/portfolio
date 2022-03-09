@@ -1,9 +1,14 @@
 package dev.yukikaze.portfolio;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import dev.yukikaze.portfolio.resolvers.JwtCookieHandlerMethodArgumentResolver;
 
 /**
  * アプリケーションコンフィグ
@@ -16,12 +21,28 @@ public class AppConfig implements WebMvcConfigurer {
     private final AppProperties appProperties;
 
     /**
+     * JwtCookieアノテーション Resolver
+     */
+    private JwtCookieHandlerMethodArgumentResolver jwtCookieHandlerMethodArgumentResolver;
+
+    /**
      * コンストラクター
      *
-     * @param appProperties アプリケーション設定
+     * @param appProperties                          アプリケーション設定
+     * @param jwtCookieHandlerMethodArgumentResolver JwtCookieアノテーション Resolver
      */
-    public AppConfig(AppProperties appProperties) {
+    public AppConfig(AppProperties appProperties,
+            JwtCookieHandlerMethodArgumentResolver jwtCookieHandlerMethodArgumentResolver) {
         this.appProperties = appProperties;
+        this.jwtCookieHandlerMethodArgumentResolver = jwtCookieHandlerMethodArgumentResolver;
+    }
+
+    /**
+     * Resolverの登録
+     */
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        argumentResolvers.add(this.jwtCookieHandlerMethodArgumentResolver);
     }
 
     /**
