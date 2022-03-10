@@ -1,3 +1,23 @@
-<p>login works!</p>
+<img class="icon" src="assets/icons/icon-512x512.png" width="64" height="64" />
+<h1 class="header">Login to Portfolio</h1>
 
-<button (click)="loginButtonClick()">login</button>
+<mat-card class="card">
+    <mat-card-content>
+        <p class="error-message" *ngIf="errorMessage$ | async as errorMessage">{{ errorMessage }}</p>
+        <form [formGroup]="fgLoginForm" (ngSubmit)="loginFormSubmit(fgLoginForm)">
+            <mat-form-field class="account" appearance="fill">
+                <mat-label>ユーザーアカウント</mat-label>
+                <input matInput formControlName="fcAccount" />
+                <mat-error *ngIf="fgLoginForm.get('fcAccount')?.invalid">必須入力です。</mat-error>
+            </mat-form-field>
+            <mat-form-field class="password" appearance="fill">
+                <mat-label>パスワード</mat-label>
+                <input #password matInput formControlName="fcPassword" />
+                <mat-error *ngIf="fgLoginForm.get('fcPassword')?.invalid">必須入力です。</mat-error>
+            </mat-form-field>
+            <button type="submit" class="login-button" mat-flat-button color="primary" [disabled]="fgLoginForm.invalid">ログイン</button>
+        </form>
+    </mat-card-content>
+</mat-card>
+
+<button class="test-user-button" mat-flat-button color="accent" (click)="testUserButtonClick(fgLoginForm)">テストユーザー</button>

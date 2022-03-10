@@ -41,7 +41,7 @@ export class LoginService {
                 this.router.navigateByUrl('dashboard');
             },
             () => {
-                this._errorMessage$.next('ログインに失敗しました。アカウントかパスワードが間違っています。');
+                this._errorMessage$.next('ログインに失敗しました。アカウントもしくはパスワードが間違っています。');
             },
         );
     }

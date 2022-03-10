@@ -1,0 +1,49 @@
+@use '../../../../styles.vars' as vars;
+
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .icon {
+        padding-top: 32px;
+        padding-bottom: 24px;
+    }
+
+    .header {
+        font-size: 24px;
+        font-weight: 300;
+        letter-spacing: -0.5px;
+    }
+
+    .card {
+        width: 320px;
+
+        .error-message {
+            padding: 8px;
+            color: vars.$mat-warn;
+            border: 1px solid vars.$mat-warn;
+            border-radius: 4px;
+            background-color: map-get(vars.$portfolio-warn, 50);
+        }
+
+        .account {
+            width: 100%;
+        }
+
+        .password {
+            width: 100%;
+            margin-top: 16px;
+        }
+
+        .login-button {
+            width: 100%;
+            margin-top: 16px;
+        }
+    }
+
+    .test-user-button {
+        width: 320px;
+        margin-top: 24px;
+    }
+}
