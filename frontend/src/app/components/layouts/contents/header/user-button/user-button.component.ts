@@ -12,11 +12,16 @@ import { UserButtonService } from './user-button.service';
 })
 export class UserButtonComponent implements OnInit {
     /**
+     * ログインユーザー情報
+     */
+    loginUserInfo$ = this.userButtonService.loginUserInfo$;
+
+    /**
      * コンストラクター
      *
      * @param userButtonService UserButtonService
      */
-    constructor(public userButtonService: UserButtonService) {}
+    constructor(private userButtonService: UserButtonService) {}
 
     /**
      * 初期化

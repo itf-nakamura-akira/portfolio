@@ -11,6 +11,11 @@ import { SideNavService } from 'src/app/services/side-nav.service';
 })
 export class SideNavComponent {
     /**
+     * 開閉状況
+     */
+    isOpen$ = this.sideNavService.isOpen$;
+
+    /**
      * 認証済み情報
      */
     @Input()
@@ -21,5 +26,5 @@ export class SideNavComponent {
      *
      * @param sideNavService SideNavService
      */
-    constructor(public sideNavService: SideNavService) {}
+    constructor(private sideNavService: SideNavService) {}
 }

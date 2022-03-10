@@ -1,4 +1,4 @@
-<ng-container *ngIf="userButtonService.loginUserInfo$ | async as loginUserInfo">
+<ng-container *ngIf="loginUserInfo$ | async as loginUserInfo">
     <button mat-stroked-button class="user-button" [title]="loginUserInfo.account" [matMenuTriggerFor]="menu">
         <span class="name">{{ loginUserInfo.name }}</span>
     </button>

@@ -11,9 +11,14 @@ import { AppService } from 'src/app/app.service';
 })
 export class ContentsComponent {
     /**
+     * 認証状況
+     */
+    isAuthorized$ = this.appService.isAuthorized$;
+
+    /**
      * コンストラクター
      *
      * @param appService AppService
      */
-    constructor(public appService: AppService) {}
+    constructor(private appService: AppService) {}
 }

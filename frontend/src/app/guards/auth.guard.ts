@@ -23,6 +23,7 @@ export class AuthGuard implements CanActivate {
      */
     constructor(private router: Router, private appService: AppService) {
         this.appService.isAuthorized$.subscribe((isAuthorized) => (this._isAuthorized = isAuthorized));
+        this.appService.fetchIsAuthorized();
     }
 
     /**
@@ -70,7 +71,7 @@ export class AuthGuard implements CanActivate {
      * @returns チェック結果
      */
     private notCheckedYet(state: RouterStateSnapshot): Observable<boolean> {
-        setTimeout(() => this.appService.fetchIsAuthorized(), 0);
+        // setTimeout(() => this.appService.fetchIsAuthorized(), 0);
 
         if (state.url === '/login') {
             return this.appService.isAuthorized$.pipe(map((isAuthorized) => !isAuthorized));

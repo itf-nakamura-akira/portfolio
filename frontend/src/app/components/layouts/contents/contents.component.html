@@ -1,4 +1,4 @@
-<app-header class="header" *ngIf="appService.isAuthorized$ | async"></app-header>
-<app-side-nav class="contents" [isAuthorized]="!!(appService.isAuthorized$ | async)">
+<app-header class="header" *ngIf="isAuthorized$ | async"></app-header>
+<app-side-nav class="contents" [isAuthorized]="!!(isAuthorized$ | async)">
     <router-outlet></router-outlet>
 </app-side-nav>
