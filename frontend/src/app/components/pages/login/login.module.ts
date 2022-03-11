@@ -4,7 +4,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { LoginRoutingModule } from './login-routing.module';
@@ -16,7 +15,6 @@ import { TestUserBottomSheetComponent } from './test-user-bottom-sheet/test-user
     imports: [
         CommonModule,
         ReactiveFormsModule,
-        MatFormFieldModule,
         MatInputModule,
         MatButtonModule,
         MatCardModule,
