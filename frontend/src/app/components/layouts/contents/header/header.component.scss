@@ -8,6 +8,7 @@
         font-size: 32px;
         font-family: 'Noto Serif', serif;
         letter-spacing: 2px;
+        color: map-get(map-get(vars.$portfolio-primary, contrast), 500);
 
         &:first-letter {
             color: vars.$mat-accent;
