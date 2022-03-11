@@ -27,6 +27,8 @@ $header-height: 64px;
 $side-nav-width: 200px;
 $side-nav-width-close: 56px;
 $side-nav-item-height: $side-nav-width-close;
+$main-contents-padding-x: 40px;
+$main-contents-padding-y: 24px;
 
 @mixin side-nav-animation($duration) {
     transition-property: flex-basis, left, padding-left;

@@ -21,15 +21,18 @@
 
     .main {
         flex-basis: calc(100% - vars.$side-nav-width);
-        padding-left: vars.$side-nav-width;
-        padding-top: vars.$header-height;
+        padding-left: calc(vars.$side-nav-width + vars.$main-contents-padding-x);
+        padding-right: vars.$main-contents-padding-x;
+        padding-top: calc(vars.$header-height + vars.$main-contents-padding-y);
         @include vars.side-nav-animation(150ms);
     }
 
     &:not(.menu-is-open) {
         .main {
             flex-basis: calc(100% - vars.$side-nav-width-close);
-            padding-left: vars.$side-nav-width-close;
+            padding-left: calc(vars.$side-nav-width-close + vars.$main-contents-padding-x);
+            padding-right: vars.$main-contents-padding-x;
+            padding-top: calc(vars.$header-height + vars.$main-contents-padding-y);
         }
     }
 

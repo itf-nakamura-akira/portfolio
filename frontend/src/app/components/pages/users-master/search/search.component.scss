@@ -1,0 +1,11 @@
+:host {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 8px;
+    align-items: center;
+
+    .text-search {
+        max-width: 320px;
+        width: 100%;
+    }
+}

@@ -5,17 +5,17 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ListComponent } from './list/list.component';
-import { SearchComponent } from './search/search.component';
-import { UsersMasterComponent } from './users-master.component';
+import { UsersMasterHttpService } from '../users-master-http.service';
+import { UsersMasterService } from '../users-master.service';
+import { SearchComponent } from './search.component';
 
-describe('UsersMasterComponent', () => {
-    let component: UsersMasterComponent;
-    let fixture: ComponentFixture<UsersMasterComponent>;
+describe('SearchComponent', () => {
+    let component: SearchComponent;
+    let fixture: ComponentFixture<SearchComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [UsersMasterComponent, SearchComponent, ListComponent],
+            declarations: [SearchComponent],
             imports: [
                 RouterTestingModule,
                 BrowserAnimationsModule,
@@ -24,11 +24,12 @@ describe('UsersMasterComponent', () => {
                 MatSelectModule,
                 MatSlideToggleModule,
             ],
+            providers: [UsersMasterService, UsersMasterHttpService],
         }).compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(UsersMasterComponent);
+        fixture = TestBed.createComponent(SearchComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

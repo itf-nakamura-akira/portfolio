@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ProgressBarModule } from '../../shared/progress-bar/progress-bar.module';
 import { ContentsComponent } from './contents.component';
 import { HeaderComponent } from './header/header.component';
 import { MenuButtonComponent } from './header/menu-button/menu-button.component';
@@ -24,7 +25,7 @@ describe('ContentsComponent', () => {
                 UserButtonComponent,
                 SideMenuItemComponent,
             ],
-            imports: [RouterTestingModule, HttpClientModule, MatToolbarModule, MatIconModule],
+            imports: [RouterTestingModule, HttpClientModule, MatToolbarModule, MatIconModule, ProgressBarModule],
         }).compileComponents();
     });
 

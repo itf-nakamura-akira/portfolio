@@ -7,11 +7,10 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './components/layouts/layout.module';
-import { UsersMasterComponent } from './components/pages/users-master/users-master.component';
 import { InterceptorService } from './services/interceptor.service';
 
 @NgModule({
-    declarations: [AppComponent, UsersMasterComponent],
+    declarations: [AppComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,

@@ -1,0 +1,15 @@
+<mat-form-field class="text-search">
+    <mat-label>アカウント / 表示名</mat-label>
+    <input matInput [formControl]="fcText" />
+</mat-form-field>
+
+<mat-form-field class="permission">
+    <mat-label>権限</mat-label>
+    <mat-select multiple [formControl]="fcPermission">
+        <mat-option *ngFor="let usersPermission of usersPermissionMapping" [value]="usersPermission.value">
+            {{ usersPermission.name }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<mat-slide-toggle [formControl]="fcIsEnabled">無効なユーザーを表示</mat-slide-toggle>
