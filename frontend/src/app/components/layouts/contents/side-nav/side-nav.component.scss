@@ -8,7 +8,7 @@
         position: fixed;
         left: 0;
         top: vars.$header-height;
-        transition: vars.$side-nav-animation;
+        @include vars.side-nav-animation(150ms);
         height: calc(100vh - vars.$header-height);
         overflow-y: scroll;
         scrollbar-width: none;
@@ -23,7 +23,7 @@
         flex-basis: calc(100% - vars.$side-nav-width);
         padding-left: vars.$side-nav-width;
         padding-top: vars.$header-height;
-        transition: vars.$side-nav-animation;
+        @include vars.side-nav-animation(150ms);
     }
 
     &:not(.menu-is-open) {
@@ -40,12 +40,15 @@
     &:not(.authorized) {
         .nav {
             left: calc(-1 * vars.$side-nav-width);
+            @include vars.side-nav-animation(0ms);
+            height: calc(100vh - vars.$header-height);
         }
 
         .main {
             flex-basis: 100%;
             padding-left: 0;
             padding-top: 0;
+            @include vars.side-nav-animation(0ms);
         }
     }
 }

@@ -25,7 +25,13 @@ $mat-background: map-get($portfolio-theme, background);
 // app
 $header-height: 64px;
 $side-nav-width: 240px;
-$side-nav-animation: all 250ms 0s ease;
+
+@mixin side-nav-animation($duration) {
+    transition-property: flex-basis, left, padding-left;
+    transition-duration: $duration;
+    transition-delay: 0s;
+    transition-timing-function: ease;
+}
 
 @mixin line-clamp($line) {
     display: -webkit-box;
