@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { SideNavService } from 'src/app/services/side-nav.service';
 
 /**
  * サイドメニューアイテムComponent
@@ -28,7 +29,14 @@ export class SideMenuItemComponent {
     route = '';
 
     /**
-     * コンストラクター
+     * 開閉状況
      */
-    constructor() {}
+    isOpen$ = this.sideNavService.isOpen$;
+
+    /**
+     * コンストラクター
+     *
+     * @param sideNavService SideNavService
+     */
+    constructor(private sideNavService: SideNavService) {}
 }

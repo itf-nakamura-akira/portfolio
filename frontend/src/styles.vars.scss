@@ -24,7 +24,9 @@ $mat-background: map-get($portfolio-theme, background);
 
 // app
 $header-height: 64px;
-$side-nav-width: 240px;
+$side-nav-width: 200px;
+$side-nav-width-close: 56px;
+$side-nav-item-height: $side-nav-width-close;
 
 @mixin side-nav-animation($duration) {
     transition-property: flex-basis, left, padding-left;

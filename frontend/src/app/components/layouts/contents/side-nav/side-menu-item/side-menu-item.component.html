@@ -1,6 +1,16 @@
-<a class="anker" [routerLink]="route">
-    <div class="anker-contents" routerLinkActive="selected">
-        <mat-icon class="icon">{{ icon }}</mat-icon>
-        <span>{{ label }}</span>
-    </div>
-</a>
+<ng-container id="panel" *ngIf="isOpen$ | async; then open; else close"></ng-container>
+<ng-template #open>
+    <a class="anker" [routerLink]="route">
+        <div class="anker-contents menu-is-open" routerLinkActive="selected">
+            <mat-icon class="icon">{{ icon }}</mat-icon>
+            <span>{{ label }}</span>
+        </div>
+    </a>
+</ng-template>
+<ng-template #close>
+    <a class="anker" [routerLink]="route" [matTooltip]="label" matTooltipPosition="after">
+        <div class="anker-contents" routerLinkActive="selected">
+            <mat-icon class="icon">{{ icon }}</mat-icon>
+        </div>
+    </a>
+</ng-template>

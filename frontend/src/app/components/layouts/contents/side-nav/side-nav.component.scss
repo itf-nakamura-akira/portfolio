@@ -27,13 +27,9 @@
     }
 
     &:not(.menu-is-open) {
-        .nav {
-            left: calc(-1 * vars.$side-nav-width);
-        }
-
         .main {
-            flex-basis: 100%;
-            padding-left: 0;
+            flex-basis: calc(100% - vars.$side-nav-width-close);
+            padding-left: vars.$side-nav-width-close;
         }
     }
 

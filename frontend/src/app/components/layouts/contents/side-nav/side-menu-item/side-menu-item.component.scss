@@ -8,7 +8,7 @@
         display: flex;
         align-items: center;
         width: vars.$side-nav-width;
-        height: 60px;
+        height: vars.$side-nav-item-height;
 
         .icon {
             margin: 0 16px;
@@ -19,8 +19,12 @@
         }
 
         &.selected {
-            color: mat.get-color-from-palette(vars.$portfolio-primary, A700);
+            color: mat.get-color-from-palette(vars.$portfolio-primary, 500);
             background-color: mat.get-color-from-palette(vars.$portfolio-primary, A700, 0.1);
+        }
+
+        &:not(.menu-is-open) {
+            width: vars.$side-nav-width-close;
         }
     }
 }
