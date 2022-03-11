@@ -1,7 +1,8 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { finalize, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { ProgressBarService } from './progress-bar.service';
 
 /**
  * HttpClient をインターセプトする Service
@@ -12,8 +13,10 @@ import { environment } from 'src/environments/environment';
 export class InterceptorService implements HttpInterceptor {
     /**
      * コンストラクター
+     *
+     * @param progressBarService ProgressBarService
      */
-    constructor() {}
+    constructor(private progressBarService: ProgressBarService) {}
 
     /**
      * インターセプトメソッド
@@ -29,6 +32,9 @@ export class InterceptorService implements HttpInterceptor {
             withCredentials: true,
         });
 
-        return next.handle(cloneReq);
+        return next.handle(cloneReq).pipe(
+            tap(() => this.progressBarService.start()),
+            finalize(() => this.progressBarService.stop()),
+        );
     }
 }

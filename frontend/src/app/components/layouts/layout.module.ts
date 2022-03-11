@@ -6,6 +6,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
+import { ProgressBarModule } from '../shared/progress-bar/progress-bar.module';
 import { ContentsComponent } from './contents/contents.component';
 import { HeaderComponent } from './contents/header/header.component';
 import { MenuButtonComponent } from './contents/header/menu-button/menu-button.component';
@@ -15,7 +16,16 @@ import { SideNavComponent } from './contents/side-nav/side-nav.component';
 
 @NgModule({
     declarations: [HeaderComponent, MenuButtonComponent, SideNavComponent, ContentsComponent, UserButtonComponent, SideMenuItemComponent],
-    imports: [CommonModule, RouterModule, MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, MatTooltipModule],
+    imports: [
+        CommonModule,
+        RouterModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatTooltipModule,
+        ProgressBarModule,
+    ],
     exports: [HeaderComponent, SideNavComponent, ContentsComponent],
 })
 export class LayoutModule {}
