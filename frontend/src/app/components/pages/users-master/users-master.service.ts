@@ -41,7 +41,7 @@ export class UsersMasterService {
                             data.name.includes(filteringParameter.text),
                     )
                     .filter((data) => filteringParameter.permission.length === 0 || filteringParameter.permission.includes(data.permission))
-                    .filter((data) => !filteringParameter.isEnabled || (filteringParameter.isEnabled && data.isEnabled));
+                    .filter((data) => filteringParameter.isEnabled || data.isEnabled);
             }),
         );
     }
