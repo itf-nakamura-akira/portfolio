@@ -1,2 +1,2 @@
 <app-search></app-search>
-<app-list></app-list>
+<app-list *ngIf="usersData$ | async as usersData" [data]="usersData"></app-list>

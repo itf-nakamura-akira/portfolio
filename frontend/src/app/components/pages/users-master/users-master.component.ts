@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { takeUntil } from 'rxjs';
 import { OnDestroyEmitter } from '../../on-destroy-emitter';
 import { UsersMasterService } from './users-master.service';
 
@@ -14,6 +13,11 @@ import { UsersMasterService } from './users-master.service';
 })
 export class UsersMasterComponent extends OnDestroyEmitter implements OnInit {
     /**
+     * ユーザーデータ
+     */
+    usersData$ = this.usersMasterService.usersData$;
+
+    /**
      * コンストラクター
      *
      * @param usersMasterService UsersMasterService
@@ -26,8 +30,6 @@ export class UsersMasterComponent extends OnDestroyEmitter implements OnInit {
      * 初期化
      */
     ngOnInit(): void {
-        this.usersMasterService.filteringParameter$.pipe(takeUntil(this.onDestroy$)).subscribe((parameters) => {
-            // console.log(parameters);
-        });
+        this.usersMasterService.fetchData();
     }
 }

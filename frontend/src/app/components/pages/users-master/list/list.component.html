@@ -1,1 +1,24 @@
-<p>list works!</p>
+<table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="account">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>アカウント</th>
+        <td mat-cell *matCellDef="let element">{{ element.account }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>表示名</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="permission">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>権限</th>
+        <td mat-cell *matCellDef="let element">{{ UsersPermissionMapping[element.permission] }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="isEnabled">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>有効ステータス</th>
+        <td mat-cell *matCellDef="let element">{{ element.isEnabled }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
