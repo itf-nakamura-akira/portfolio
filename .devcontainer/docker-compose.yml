@@ -8,8 +8,8 @@ services:
         command: sleep infinity
         restart: always
         ports:
-            - '52425:4200' # Angular
-            - '52428:8080' # Java
+            - '56425:4200' # Angular
+            - '56428:8080' # Java
         volumes:
             - ../:/workspace
         env_file: ./environment.env
@@ -25,7 +25,7 @@ services:
             - ../database/mariadb.cnf:/etc/mysql/mariadb.cnf
             - ../database/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
         ports:
-            - '52420:3306' # MariaDB
+            - '56420:3306' # MariaDB
 volumes:
     portfolio-db-volume:
         driver: local
