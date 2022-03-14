@@ -1,8 +1,10 @@
 import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { UsersPermissionMapping } from 'src/app/enums/usersPermission';
+import { UpdateDialogComponent } from '../update-dialog/update-dialog.component';
 import { User } from '../users-master-http.service';
 
 @Component({
@@ -50,8 +52,10 @@ export class ListComponent implements AfterViewInit {
 
     /**
      * コンストラクター
+     *
+     * @param matDialog MatDialog
      */
-    constructor() {}
+    constructor(private matDialog: MatDialog) {}
 
     /**
      * 初期化
@@ -66,6 +70,15 @@ export class ListComponent implements AfterViewInit {
      * @param row クリックされた行
      */
     rowClick(row: User): void {
-        alert(row.name);
+        const dialogConfig: MatDialogConfig<User> = {
+            data: row,
+            width: '400px',
+        };
+        const dialogRef = this.matDialog
+            .open(UpdateDialogComponent, dialogConfig)
+            .afterClosed()
+            .subscribe((result) => {
+                console.log(`Dialog result: ${result}`);
+            });
     }
 }
