@@ -25,13 +25,6 @@ export class UserButtonHttpService {
     loginUser(): Observable<LoginUserResponse> {
         return this.httpClient.get<LoginUserResponse>('/common/users/loginUser');
     }
-
-    /**
-     * サインアウト処理
-     */
-    logout(): Observable<void> {
-        return this.httpClient.post<void>('/common/users/logout', {});
-    }
 }
 
 /**

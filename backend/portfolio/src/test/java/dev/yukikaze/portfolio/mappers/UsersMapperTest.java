@@ -41,7 +41,7 @@ public class UsersMapperTest {
         List<UsersEntity> usersList = this.usersMapper.selectAll();
 
         // 件数の確認
-        assertEquals(usersList.size(), 12);
+        assertEquals(usersList.size(), 728);
 
         // データの確認
         assertEquals(usersList.get(0).getAccount(), "admin");

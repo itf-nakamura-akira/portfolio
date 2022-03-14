@@ -24,6 +24,13 @@ export class AppHttpService {
     getIsAuthorized(): Observable<IsAuthorizedResponse> {
         return this.httpClient.get<IsAuthorizedResponse>('/common/app/isAuthorized');
     }
+
+    /**
+     * ログアウト処理
+     */
+    logout(): Observable<void> {
+        return this.httpClient.post<void>('/common/app/logout', {});
+    }
 }
 
 /**

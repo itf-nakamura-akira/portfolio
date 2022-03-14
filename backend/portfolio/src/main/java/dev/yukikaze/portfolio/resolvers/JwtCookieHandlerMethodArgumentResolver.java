@@ -4,11 +4,13 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.core.MethodParameter;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.WebUtils;
 
 import dev.yukikaze.portfolio.Constants;
@@ -33,10 +35,11 @@ public class JwtCookieHandlerMethodArgumentResolver implements HandlerMethodArgu
         Cookie jwtCookie = WebUtils.getCookie(httpServletRequest, Constants.JWT_COOKIE_KEY);
 
         if (jwtCookie != null) {
-            return this.jwtUtils.verifyToken(jwtCookie.getValue()).orElse(null);
+            return this.jwtUtils.verifyToken(jwtCookie.getValue())
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED));
         }
 
-        return null;
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
     }
 
     @Override

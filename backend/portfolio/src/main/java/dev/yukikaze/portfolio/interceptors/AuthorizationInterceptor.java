@@ -65,7 +65,7 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
         // ユーザー権限のチェック
         if (!this.validateJwtToken(request, handler)
                 || !this.validatePermission(request, handler)) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
 
         return true;
@@ -132,7 +132,7 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
             currentAttributes.setAttribute("requestUserId", jwtPayload.id(),
                     RequestAttributes.SCOPE_REQUEST);
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
 
         return true;
@@ -179,7 +179,7 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
 
             return Arrays.asList(annotationPermission).contains(cookiePermission);
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
     }
 }
