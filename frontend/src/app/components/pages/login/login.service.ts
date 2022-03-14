@@ -35,14 +35,14 @@ export class LoginService {
      * @param password パスワード
      */
     login(account: string, password: string): void {
-        this.loginHttpService.login(account, password).subscribe(
-            () => {
+        this.loginHttpService.login(account, password).subscribe({
+            next: () => {
                 this.appService.setIsAuthorized(true);
                 this.router.navigateByUrl('dashboard');
             },
-            () => {
+            error: () => {
                 this._errorMessage$.next('ログインに失敗しました。アカウントもしくはパスワードが間違っています。');
             },
-        );
+        });
     }
 }
