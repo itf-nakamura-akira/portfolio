@@ -5,5 +5,23 @@
 
     .mat-table {
         width: 100%;
+
+        .mat-column- {
+            $column-width-account: 300px;
+            $column-width-name: 320px;
+            $column-width-permission: 140px;
+
+            &account {
+                width: $column-width-account;
+            }
+
+            &name {
+                width: $column-width-name;
+            }
+
+            &permission {
+                width: $column-width-permission;
+            }
+        }
     }
 }

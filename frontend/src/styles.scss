@@ -24,8 +24,31 @@ a {
 // MatTable
 .mat-table {
     tbody {
-        .mat-row:hover {
-            background-color: map-get(vars.$mat-background, hover);
+        .mat-row {
+            &:hover {
+                background-color: map-get(vars.$mat-background, hover);
+            }
+
+            .mat-cell {
+                .mat-icon {
+                    vertical-align: middle;
+                }
+            }
         }
+    }
+}
+
+// MatIcon
+.mat-icon {
+    &.primary {
+        color: vars.$mat-primary;
+    }
+
+    &.warn {
+        color: vars.$mat-warn;
+    }
+
+    &.accent {
+        color: vars.$mat-accent;
     }
 }

@@ -59,4 +59,13 @@ export class ListComponent implements AfterViewInit {
     ngAfterViewInit(): void {
         this.dataSource.sort = this.sort;
     }
+
+    /**
+     * 行クリックイベントハンドラー
+     *
+     * @param row クリックされた行
+     */
+    rowClick(row: User): void {
+        alert(row.name);
+    }
 }
