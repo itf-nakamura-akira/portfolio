@@ -22,7 +22,7 @@ services:
         env_file: ./environment.env
         volumes:
             - portfolio-db-volume:/var/lib/mariadb/
-            - ../database/mariadb.cnf:/etc/mysql/mariadb.cnf
+            - ../database/conf.d:/etc/mysql/conf.d
             - ../database/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
         ports:
             - '56420:3306' # MariaDB
