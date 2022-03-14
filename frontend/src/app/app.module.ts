@@ -34,7 +34,7 @@ import { InterceptorService } from './services/interceptor.service';
         },
         {
             provide: MAT_PAGINATOR_DEFAULT_OPTIONS,
-            useValue: { pageSizeOptions: [10, 25, 50, 100] },
+            useValue: { pageSizeOptions: [10, 25, 50, 100], showFirstLastButtons: true },
         },
         {
             provide: MatPaginatorIntl,
