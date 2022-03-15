@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -64,7 +65,7 @@ public class UsersMasterController {
      *
      * @throws Exception エラーレスポンス
      */
-    @PostMapping("regist")
+    @PostMapping
     public RegistUsersResponse regist(@RequestBody RegistRequestBody body) throws Exception {
         try {
             UsersEntity user = this.usersService.registUser(body.account(), body.name(),
@@ -89,7 +90,7 @@ public class UsersMasterController {
      *
      * @throws Exception エラーレスポンス
      */
-    @PostMapping("update")
+    @PutMapping
     public void update(@RequestBody UpdateRequestBody body) throws Exception {
         try {
             this.usersService.updateUser(body.id(), body.account(), body.name(),
@@ -109,7 +110,7 @@ public class UsersMasterController {
      *
      * @param body 対象のユーザーID
      */
-    @DeleteMapping()
+    @DeleteMapping
     public void delete(@RequestBody DeleteRequestBody body) {
         try {
             this.usersService.deleteUser(body.id());

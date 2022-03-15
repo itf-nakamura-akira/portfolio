@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UsersPermission, UsersPermissionMapping } from 'src/app/enums/usersPermission';
 import { User } from '../users-master-http.service';
+import { UsersMasterService } from '../users-master.service';
 
 /**
  * ユーザー情報更新ダイアログ Component
@@ -33,8 +34,13 @@ export class UpdateDialogComponent implements OnInit {
      *
      * @param matDialogRef MatDialogRef
      * @param data 編集データ
+     * @param usersMasterService UsersMasterService
      */
-    constructor(private matDialogRef: MatDialogRef<UpdateDialogComponent>, @Inject(MAT_DIALOG_DATA) private data: User) {}
+    constructor(
+        private matDialogRef: MatDialogRef<UpdateDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) private data: User,
+        private usersMasterService: UsersMasterService,
+    ) {}
 
     /**
      * 初期化
@@ -52,6 +58,17 @@ export class UpdateDialogComponent implements OnInit {
      * @param formGroup 更新フォームグループ
      */
     updateFormSubmit(formGroup: FormGroup): void {
-        this.matDialogRef.close();
+        if (formGroup.invalid) {
+            return;
+        }
+
+        this.usersMasterService.updateUser(
+            this.data.id,
+            formGroup.get('fcAccount')?.value,
+            formGroup.get('fcName')?.value,
+            formGroup.get('fcPermission')?.value,
+            formGroup.get('fcIsEnabled')?.value,
+            () => this.matDialogRef.close(),
+        );
     }
 }

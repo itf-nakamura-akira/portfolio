@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -53,9 +53,10 @@ export class ListComponent implements AfterViewInit {
     /**
      * コンストラクター
      *
+     * @param viewContainerRef ViewContainerRef
      * @param matDialog MatDialog
      */
-    constructor(private matDialog: MatDialog) {}
+    constructor(private viewContainerRef: ViewContainerRef, private matDialog: MatDialog) {}
 
     /**
      * 初期化
@@ -73,8 +74,9 @@ export class ListComponent implements AfterViewInit {
         const dialogConfig: MatDialogConfig<User> = {
             data: row,
             width: '400px',
+            viewContainerRef: this.viewContainerRef,
         };
-        const dialogRef = this.matDialog
+        this.matDialog
             .open(UpdateDialogComponent, dialogConfig)
             .afterClosed()
             .subscribe((result) => {

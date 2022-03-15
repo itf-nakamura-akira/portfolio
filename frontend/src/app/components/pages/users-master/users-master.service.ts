@@ -78,6 +78,43 @@ export class UsersMasterService {
     }
 
     /**
+     * ユーザーデータの更新
+     *
+     * @param id ID
+     * @param account アカウント
+     * @param name 表示名
+     * @param permission ユーザー権限
+     * @param isEnabled 有効ステータス
+     * @param successCallback 更新成功時コールバック
+     */
+    updateUser(
+        id: number,
+        account: string,
+        name: string,
+        permission: UsersPermission,
+        isEnabled: boolean,
+        successCallback: () => void,
+    ): void {
+        this.usersMasterHttpService.putUser(id, account, name, permission, isEnabled).subscribe(() => {
+            alert(`${name}(${account})さんのデータを更新しました。`);
+            this._usersData$.next(
+                this._usersData$.value.map((user) =>
+                    user.id === id
+                        ? {
+                              id,
+                              account,
+                              name,
+                              permission,
+                              isEnabled,
+                          }
+                        : user,
+                ),
+            );
+            successCallback();
+        });
+    }
+
+    /**
      * URLパラメーターを更新する
      *
      * @param params 検索パラメーター

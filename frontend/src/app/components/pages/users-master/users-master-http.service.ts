@@ -25,6 +25,25 @@ export class UsersMasterHttpService {
     getList(): Observable<GetListResponse> {
         return this.httpClient.get<GetListResponse>('/masters/usersMaster/list');
     }
+
+    /**
+     * ユーザーデータの更新
+     *
+     * @param id ID
+     * @param account アカウント
+     * @param name 表示名
+     * @param permission ユーザー権限
+     * @param isEnabled 有効ステータス
+     */
+    putUser(id: number, account: string, name: string, permission: UsersPermission, isEnabled: boolean): Observable<void> {
+        return this.httpClient.put<void>('/masters/usersMaster', {
+            id,
+            account,
+            name,
+            permission,
+            isEnabled,
+        });
+    }
 }
 
 /**
