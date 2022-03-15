@@ -76,11 +76,6 @@ export class ListComponent implements AfterViewInit {
             width: '400px',
             viewContainerRef: this.viewContainerRef,
         };
-        this.matDialog
-            .open(UpdateDialogComponent, dialogConfig)
-            .afterClosed()
-            .subscribe((result) => {
-                console.log(`Dialog result: ${result}`);
-            });
+        this.matDialog.open(UpdateDialogComponent, dialogConfig);
     }
 }

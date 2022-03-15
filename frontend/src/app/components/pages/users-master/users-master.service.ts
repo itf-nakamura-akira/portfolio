@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Params, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 import { UsersPermission } from 'src/app/enums/usersPermission';
 import { User, UsersMasterHttpService } from './users-master-http.service';
@@ -51,8 +52,9 @@ export class UsersMasterService {
      *
      * @param router Router
      * @param usersMasterHttpService UsersMasterHttpService
+     * @param toastrService ToastrService
      */
-    constructor(private router: Router, private usersMasterHttpService: UsersMasterHttpService) {}
+    constructor(private router: Router, private usersMasterHttpService: UsersMasterHttpService, private toastrService: ToastrService) {}
 
     /**
      * ユーザーデータを読み込む
@@ -96,7 +98,7 @@ export class UsersMasterService {
         successCallback: () => void,
     ): void {
         this.usersMasterHttpService.putUser(id, account, name, permission, isEnabled).subscribe(() => {
-            alert(`${name}(${account})さんのデータを更新しました。`);
+            this.toastrService.success(`${name}(${account})さんのデータを更新しました。`);
             this._usersData$.next(
                 this._usersData$.value.map((user) =>
                     user.id === id
