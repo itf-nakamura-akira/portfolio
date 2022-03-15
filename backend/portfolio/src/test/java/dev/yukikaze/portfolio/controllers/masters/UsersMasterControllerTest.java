@@ -132,6 +132,22 @@ public class UsersMasterControllerTest {
         // 例外の確認
         assertEquals(e.getStatus(), HttpStatus.INTERNAL_SERVER_ERROR);
         assertEquals(e.getReason(), "「kawakami」というユーザーは既に存在しています。");
+
+        // 管理者ユーザーが0人になるような更新(1)
+        e = assertThrows(ResponseStatusException.class, () -> this.usersMasterController
+                .update(new UpdateRequestBody(1L, account, name, UsersPermission.User, isEnabled)));
+
+        // 例外の確認
+        assertEquals(e.getStatus(), HttpStatus.INTERNAL_SERVER_ERROR);
+        assertEquals(e.getReason(), "有効な管理者ユーザーが0人にならないようにしてください。");
+
+        // 管理者ユーザーが0人になるような更新(2)
+        e = assertThrows(ResponseStatusException.class, () -> this.usersMasterController
+                .update(new UpdateRequestBody(1L, account, name, permission, false)));
+
+        // 例外の確認
+        assertEquals(e.getStatus(), HttpStatus.INTERNAL_SERVER_ERROR);
+        assertEquals(e.getReason(), "有効な管理者ユーザーが0人にならないようにしてください。");
     }
 
     @Test

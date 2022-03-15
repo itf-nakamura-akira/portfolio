@@ -105,12 +105,16 @@ public class UsersService {
             Boolean isEnabled) {
         try {
             if (!this.usersMapper.updateUser(id, account, name, permission, isEnabled)) {
-                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                        "更新対象のデータが見つかりませんでした。");
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "更新対象のデータが見つかりませんでした。");
+            }
+
+            // 更新後に管理者ユーザーが0人にならないようにする
+            if (this.usersMapper.selectByPermission(UsersPermission.Admin).stream().filter(user -> user.getIsEnabled())
+                    .toList().size() == 0) {
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "有効な管理者ユーザーが0人にならないようにしてください。");
             }
         } catch (DuplicateKeyException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "「" + account + "」というユーザーは既に存在しています。");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "「" + account + "」というユーザーは既に存在しています。");
         }
 
         return new UsersEntity(id, account, "", name, permission, isEnabled);

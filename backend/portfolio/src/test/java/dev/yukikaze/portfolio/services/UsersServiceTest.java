@@ -125,11 +125,11 @@ public class UsersServiceTest {
         assertEquals(updatedUser.getIsEnabled(), assertUpdatedUser.getIsEnabled());
 
         // ユーザーデータの更新
-        updatedUser = this.usersService.updateUser(1L, "user-update", "テストユーザー-update",
+        updatedUser = this.usersService.updateUser(12L, "user-update2", "テストユーザー-update",
                 UsersPermission.User, false);
 
         // 更新したデータの取得
-        assertUpdatedUser = this.usersService.getUserById(1L);
+        assertUpdatedUser = this.usersService.getUserById(12L);
 
         // データの確認
         assertEquals(updatedUser.getAccount(), assertUpdatedUser.getAccount());
@@ -153,6 +153,24 @@ public class UsersServiceTest {
         // 例外の確認
         assertEquals(e.getStatus(), HttpStatus.INTERNAL_SERVER_ERROR);
         assertEquals(e.getReason(), "「kawakami」というユーザーは既に存在しています。");
+
+        // 管理者ユーザーが0人になるような更新(1)
+        e = assertThrows(ResponseStatusException.class,
+                () -> this.usersService.updateUser(1L, "user-update",
+                        "テストユーザー-update", UsersPermission.User, true));
+
+        // 例外の確認
+        assertEquals(e.getStatus(), HttpStatus.INTERNAL_SERVER_ERROR);
+        assertEquals(e.getReason(), "有効な管理者ユーザーが0人にならないようにしてください。");
+
+        // 管理者ユーザーが0人になるような更新(2)
+        e = assertThrows(ResponseStatusException.class,
+                () -> this.usersService.updateUser(1L, "user-update",
+                        "テストユーザー-update", UsersPermission.Admin, false));
+
+        // 例外の確認
+        assertEquals(e.getStatus(), HttpStatus.INTERNAL_SERVER_ERROR);
+        assertEquals(e.getReason(), "有効な管理者ユーザーが0人にならないようにしてください。");
     }
 
     @Test
