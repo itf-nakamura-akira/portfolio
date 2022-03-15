@@ -78,6 +78,17 @@ public class UsersMapperMock implements UsersMapper {
     }
 
     /**
+     * ユーザー権限を指定してユーザーを取得する
+     *
+     * @param permission ユーザー権限
+     * 
+     * @return 指定した権限のデータ
+     */
+    public List<UsersEntity> selectByPermission(UsersPermission permission) {
+        return this.mockData.stream().filter(row -> row.getPermission().equals(permission)).toList();
+    }
+
+    /**
      * ユーザーの追加
      *
      * @param user 挿入するユーザーデータ

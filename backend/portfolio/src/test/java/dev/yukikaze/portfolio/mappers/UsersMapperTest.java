@@ -123,6 +123,31 @@ public class UsersMapperTest {
     }
 
     @Test
+    @DisplayName("selectByPermission メソッドのテスト")
+    public void selectByPermission() {
+        // 管理者ユーザーのデータの取得
+        List<UsersEntity> adminUsers = this.usersMapper.selectByPermission(UsersPermission.Admin);
+
+        // データの確認
+        assertEquals(adminUsers.size(), 1);
+        adminUsers.forEach(user -> assertEquals(UsersPermission.Admin, user.getPermission()));
+
+        // 一般ユーザーのデータの取得
+        List<UsersEntity> commonUsers = this.usersMapper.selectByPermission(UsersPermission.User);
+
+        // データの確認
+        assertEquals(commonUsers.size(), 726);
+        commonUsers.forEach(user -> assertEquals(UsersPermission.User, user.getPermission()));
+
+        // 参照ユーザーのデータの取得
+        List<UsersEntity> referenceUsers = this.usersMapper.selectByPermission(UsersPermission.Referencer);
+
+        // データの確認
+        assertEquals(referenceUsers.size(), 1);
+        referenceUsers.forEach(user -> assertEquals(UsersPermission.Referencer, user.getPermission()));
+    }
+
+    @Test
     @DisplayName("insertUser メソッドのテスト")
     public void insertUser() {
         // INSERTするusersデータ

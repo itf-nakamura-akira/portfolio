@@ -27,6 +27,15 @@
             account = #{account};
     </select>
 
+    <select id="selectByPermission" resultType="UsersEntity">
+        SELECT
+            *
+        FROM
+            users
+        WHERE
+            permission = #{permission};
+    </select>
+
     <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO users
             (account, password_hash, name, permission, is_enabled)

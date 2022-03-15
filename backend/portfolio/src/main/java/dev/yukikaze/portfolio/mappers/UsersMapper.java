@@ -39,6 +39,15 @@ public interface UsersMapper {
     public Optional<UsersEntity> selectByAccount(String account);
 
     /**
+     * ユーザー権限を指定してユーザーを取得する
+     *
+     * @param permission ユーザー権限
+     * 
+     * @return 指定した権限のデータ
+     */
+    public List<UsersEntity> selectByPermission(UsersPermission permission);
+
+    /**
      * ユーザーの追加
      *
      * @param user 挿入するユーザーデータ
