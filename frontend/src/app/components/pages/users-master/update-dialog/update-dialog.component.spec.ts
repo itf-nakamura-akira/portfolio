@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,7 +8,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ToastrModule } from 'ngx-toastr';
 import { UsersPermission } from 'src/app/enums/usersPermission';
+import { UsersMasterService } from '../users-master.service';
 import { UpdateDialogComponent } from './update-dialog.component';
 
 describe('UpdateDialogComponent', () => {
@@ -26,6 +30,11 @@ describe('UpdateDialogComponent', () => {
                 MatSelectModule,
                 MatSlideToggleModule,
                 MatFormFieldModule,
+                RouterTestingModule,
+                HttpClientModule,
+                ToastrModule.forRoot({
+                    progressBar: true,
+                }),
             ],
             providers: [
                 { provide: MatDialogRef, useValue: {} },
@@ -39,6 +48,7 @@ describe('UpdateDialogComponent', () => {
                         isEnabled: true,
                     },
                 },
+                UsersMasterService,
             ],
         }).compileComponents();
     });

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialogModule } from '@angular/material/dialog';
 import { RegistButtonComponent } from './regist-button.component';
 
 describe('RegistButtonComponent', () => {
@@ -8,6 +9,7 @@ describe('RegistButtonComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [RegistButtonComponent],
+            imports: [MatDialogModule],
         }).compileComponents();
     });
 

@@ -1,4 +1,14 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ToastrModule } from 'ngx-toastr';
+import { UsersMasterService } from '../users-master.service';
 import { RegistDialogComponent } from './regist-dialog.component';
 
 describe('RegistDialogComponent', () => {
@@ -8,6 +18,20 @@ describe('RegistDialogComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [RegistDialogComponent],
+            imports: [
+                ReactiveFormsModule,
+                NoopAnimationsModule,
+                MatDialogModule,
+                RouterTestingModule,
+                HttpClientModule,
+                ToastrModule.forRoot({
+                    progressBar: true,
+                }),
+                MatInputModule,
+                MatSlideToggleModule,
+                MatSelectModule,
+            ],
+            providers: [{ provide: MatDialogRef, useValue: {} }, UsersMasterService],
         }).compileComponents();
     });
 
