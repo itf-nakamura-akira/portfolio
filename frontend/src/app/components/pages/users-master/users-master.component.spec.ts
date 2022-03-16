@@ -9,8 +9,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
+import { SearchComponent } from './header/search/search.component';
 import { ListComponent } from './list/list.component';
-import { SearchComponent } from './search/search.component';
 import { UsersMasterComponent } from './users-master.component';
 
 describe('UsersMasterComponent', () => {

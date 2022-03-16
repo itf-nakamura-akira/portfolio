@@ -10,14 +10,16 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { HeaderComponent } from './header/header.component';
+import { SearchComponent } from './header/search/search.component';
 import { ListComponent } from './list/list.component';
-import { SearchComponent } from './search/search.component';
 import { UpdateDialogComponent } from './update-dialog/update-dialog.component';
 import { UsersMasterRoutingModule } from './users-master-routing.module';
 import { UsersMasterComponent } from './users-master.component';
+import { RegistButtonComponent } from './header/regist-button/regist-button.component';
 
 @NgModule({
-    declarations: [UsersMasterComponent, SearchComponent, ListComponent, UpdateDialogComponent],
+    declarations: [UsersMasterComponent, SearchComponent, ListComponent, UpdateDialogComponent, HeaderComponent, RegistButtonComponent],
     imports: [
         CommonModule,
         ReactiveFormsModule,

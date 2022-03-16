@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs';
 import { OnDestroyEmitter } from 'src/app/components/on-destroy-emitter';
 import { UsersPermissionMapping } from 'src/app/enums/usersPermission';
-import { SearchParameter, UsersMasterService } from '../users-master.service';
+import { SearchParameter, UsersMasterService } from '../../users-master.service';
 
 /**
  * ユーザー設定画面の検索フィルター Component

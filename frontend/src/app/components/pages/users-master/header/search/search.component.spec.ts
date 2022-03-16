@@ -6,8 +6,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
-import { UsersMasterHttpService } from '../users-master-http.service';
-import { UsersMasterService } from '../users-master.service';
+import { UsersMasterHttpService } from '../../users-master-http.service';
+import { UsersMasterService } from '../../users-master.service';
 import { SearchComponent } from './search.component';
 
 describe('SearchComponent', () => {
