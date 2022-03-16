@@ -11,15 +11,24 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { HeaderComponent } from './header/header.component';
+import { RegistButtonComponent } from './header/regist-button/regist-button.component';
 import { SearchComponent } from './header/search/search.component';
 import { ListComponent } from './list/list.component';
 import { UpdateDialogComponent } from './update-dialog/update-dialog.component';
 import { UsersMasterRoutingModule } from './users-master-routing.module';
 import { UsersMasterComponent } from './users-master.component';
-import { RegistButtonComponent } from './header/regist-button/regist-button.component';
+import { RegistDialogComponent } from './regist-dialog/regist-dialog.component';
 
 @NgModule({
-    declarations: [UsersMasterComponent, SearchComponent, ListComponent, UpdateDialogComponent, HeaderComponent, RegistButtonComponent],
+    declarations: [
+        UsersMasterComponent,
+        SearchComponent,
+        ListComponent,
+        UpdateDialogComponent,
+        HeaderComponent,
+        RegistButtonComponent,
+        RegistDialogComponent,
+    ],
     imports: [
         CommonModule,
         ReactiveFormsModule,

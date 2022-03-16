@@ -80,6 +80,33 @@ export class UsersMasterService {
     }
 
     /**
+     * ユーザーデータの登録
+     *
+     * @param account アカウント
+     * @param name 表示名
+     * @param password パスワード
+     * @param permission ユーザー権限
+     * @param isEnabled 有効ステータス
+     * @param successCallback 更新成功時コールバック
+     */
+    registUser(
+        account: string,
+        name: string,
+        password: string,
+        permission: UsersPermission,
+        isEnabled: boolean,
+        successCallback: () => void,
+    ): void {
+        this.usersMasterHttpService.postUser(account, name, password, permission, isEnabled).subscribe((response) => {
+            this.toastrService.success(`${name}(${account})さんのデータを追加しました。`);
+            const newList = this._usersData$.value;
+            newList.push(response.user);
+            this._usersData$.next(newList);
+            successCallback();
+        });
+    }
+
+    /**
      * ユーザーデータの更新
      *
      * @param id ID

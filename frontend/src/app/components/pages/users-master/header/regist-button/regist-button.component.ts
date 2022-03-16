@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewContainerRef } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { RegistDialogComponent } from '../../regist-dialog/regist-dialog.component';
 
 /**
  * ユーザー新規登録ボタン Component
@@ -11,11 +13,20 @@ import { Component } from '@angular/core';
 export class RegistButtonComponent {
     /**
      * コンストラクター
+     *
+     * @param viewContainerRef ViewContainerRef
+     * @param matDialog MatDialog
      */
-    constructor() {}
+    constructor(private viewContainerRef: ViewContainerRef, private matDialog: MatDialog) {}
 
     /**
      * 新規登録ボタンクリックイベントハンドラー
      */
-    buttonClick(): void {}
+    buttonClick(): void {
+        const dialogConfig: MatDialogConfig = {
+            width: '400px',
+            viewContainerRef: this.viewContainerRef,
+        };
+        this.matDialog.open(RegistDialogComponent, dialogConfig);
+    }
 }

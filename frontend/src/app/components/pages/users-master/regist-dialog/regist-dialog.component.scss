@@ -1,0 +1,12 @@
+.mat-dialog-content {
+    display: flex;
+    flex-direction: column;
+
+    > * {
+        margin-bottom: 16px;
+    }
+
+    .status-label {
+        font-weight: 700;
+    }
+}

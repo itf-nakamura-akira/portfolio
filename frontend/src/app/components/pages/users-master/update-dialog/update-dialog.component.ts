@@ -15,7 +15,7 @@ import { UsersMasterService } from '../users-master.service';
 })
 export class UpdateDialogComponent implements OnInit {
     /**
-     * フォームループ
+     * フォームグループ
      */
     fgUpdateForm = new FormGroup({
         fcAccount: new FormControl('', [Validators.required]),

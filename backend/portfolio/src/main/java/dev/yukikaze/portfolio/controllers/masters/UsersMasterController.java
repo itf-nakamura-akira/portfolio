@@ -68,8 +68,8 @@ public class UsersMasterController {
     @PostMapping
     public RegistUsersResponse regist(@RequestBody RegistRequestBody body) throws Exception {
         try {
-            UsersEntity user = this.usersService.registUser(body.account(), body.name(),
-                    body.password(), body.permission(), body.isEnabled());
+            UsersEntity user = this.usersService.registUser(body.account(), body.password(), body.name(),
+                    body.permission(), body.isEnabled());
 
             return new RegistUsersResponse(new ListUsers(user.getId(), user.getAccount(),
                     user.getName(), user.getPermission(), user.getIsEnabled()));

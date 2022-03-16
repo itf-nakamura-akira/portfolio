@@ -72,7 +72,7 @@ public class UsersMasterControllerTest {
     public void regist() throws Exception {
         // ユーザーデータの登録
         ListUsers user = this.usersMasterController.regist(
-                new RegistRequestBody("test-account", "テストアカウント", "パスワード",
+                new RegistRequestBody("test-account", "パスワード", "テストアカウント",
                         UsersPermission.Admin, true))
                 .user();
 

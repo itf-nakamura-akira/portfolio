@@ -27,6 +27,31 @@ export class UsersMasterHttpService {
     }
 
     /**
+     * ユーザーデータの登録
+     *
+     * @param account アカウント
+     * @param name 表示名
+     * @param password パスワード
+     * @param permission ユーザー権限
+     * @param isEnabled 有効ステータス
+     */
+    postUser(
+        account: string,
+        name: string,
+        password: string,
+        permission: UsersPermission,
+        isEnabled: boolean,
+    ): Observable<PostUserResponse> {
+        return this.httpClient.post<PostUserResponse>('/masters/usersMaster', {
+            account,
+            name,
+            password,
+            permission,
+            isEnabled,
+        });
+    }
+
+    /**
      * ユーザーデータの更新
      *
      * @param id ID
@@ -51,6 +76,13 @@ export class UsersMasterHttpService {
  */
 interface GetListResponse {
     users: User[];
+}
+
+/**
+ * postUser メソッドのレスポンス
+ */
+interface PostUserResponse {
+    user: User;
 }
 
 /**
