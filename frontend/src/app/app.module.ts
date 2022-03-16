@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MatPaginatorIntlJa } from './classes/mat-paginator-intl-ja';
 import { LayoutModule } from './components/layouts/layout.module';
+import { MessageDialogModule } from './components/shared/message-dialog/message-dialog.module';
 import { InterceptorService } from './services/interceptor.service';
 
 @NgModule({
@@ -29,6 +30,7 @@ import { InterceptorService } from './services/interceptor.service';
             progressBar: true,
         }),
         LayoutModule,
+        MessageDialogModule,
     ],
     providers: [
         {
