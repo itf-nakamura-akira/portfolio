@@ -3,6 +3,7 @@ package dev.yukikaze.portfolio.exception;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
@@ -34,6 +35,15 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
 
         return this.handleExceptionInternal(ex, headers, status, "サーバーでエラーが発生しました。", request);
+    }
+
+    /**
+     * HttpMessageが正常に読み込めなかったときのエラーをハンドリングする
+     */
+    protected org.springframework.http.ResponseEntity<java.lang.Object> handleHttpMessageNotReadable(
+            HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        return this.handleExceptionInternal(ex, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, "サーバーでエラーが発生しました。",
+                request);
     }
 
     /**
