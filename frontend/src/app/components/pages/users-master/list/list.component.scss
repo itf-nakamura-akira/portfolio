@@ -10,6 +10,7 @@
             $column-width-account: 300px;
             $column-width-name: 320px;
             $column-width-permission: 140px;
+            $column-width-isEnabled: 120px;
 
             &account {
                 width: $column-width-account;
@@ -21,6 +22,18 @@
 
             &permission {
                 width: $column-width-permission;
+            }
+
+            &isEnabled {
+                width: $column-width-isEnabled;
+
+                &.mat-cell .mat-icon {
+                    margin-left: 30px;
+                }
+            }
+
+            &delete.mat-header-cell {
+                padding-left: 8px;
             }
         }
     }

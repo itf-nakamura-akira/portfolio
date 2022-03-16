@@ -38,7 +38,7 @@ export class ListComponent implements AfterViewInit {
     /**
      * 表示カラム
      */
-    readonly displayedColumns: string[] = ['account', 'name', 'permission', 'isEnabled'];
+    readonly displayedColumns: string[] = ['account', 'name', 'permission', 'isEnabled', 'delete'];
 
     /**
      * MatTable用のデータソース
@@ -77,5 +77,18 @@ export class ListComponent implements AfterViewInit {
             viewContainerRef: this.viewContainerRef,
         };
         this.matDialog.open(UpdateDialogComponent, dialogConfig);
+    }
+
+    /**
+     * 行削除ボタンイベントハンドラー
+     *
+     * @param row クリックされた行
+     * @param e クリックイベントパラメーター
+     */
+    deleteButtonClick(row: User, e: Event): void {
+        // 行クリックイベントへの伝搬キャンセル
+        e.stopPropagation();
+
+        alert(row.account);
     }
 }
