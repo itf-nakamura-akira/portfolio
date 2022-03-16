@@ -144,6 +144,20 @@ export class UsersMasterService {
     }
 
     /**
+     * ユーザーデータの削除
+     *
+     * @param id ID
+     * @param account アカウント
+     * @param name 表示名
+     */
+    deleteUser(id: number, account: string, name: string): void {
+        this.usersMasterHttpService.deleteUser(id).subscribe(() => {
+            this.toastrService.success(`${name}(${account})さんのデータを削除しました。`);
+            this._usersData$.next(this._usersData$.value.filter((user) => user.id !== id));
+        });
+    }
+
+    /**
      * URLパラメーターを更新する
      *
      * @param params 検索パラメーター

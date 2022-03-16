@@ -69,6 +69,17 @@ export class UsersMasterHttpService {
             isEnabled,
         });
     }
+
+    /**
+     * ユーザーデータの削除
+     *
+     * @param id ID
+     */
+    deleteUser(id: number): Observable<void> {
+        return this.httpClient.delete<void>('/masters/usersMaster', {
+            body: { id },
+        });
+    }
 }
 
 /**

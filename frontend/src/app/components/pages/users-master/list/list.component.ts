@@ -9,6 +9,7 @@ import { UsersPermissionMapping } from 'src/app/enums/usersPermission';
 import { MessageDialogService } from 'src/app/services/message-dialog.service';
 import { UpdateDialogComponent } from '../update-dialog/update-dialog.component';
 import { User } from '../users-master-http.service';
+import { UsersMasterService } from '../users-master.service';
 
 /**
  * ユーザーデータの一覧を表示する Component
@@ -62,11 +63,13 @@ export class ListComponent implements AfterViewInit {
      * @param viewContainerRef ViewContainerRef
      * @param matDialog MatDialog
      * @param messageDialogService MessageDialogService
+     * @param usersMasterService UsersMasterService
      */
     constructor(
         private viewContainerRef: ViewContainerRef,
         private matDialog: MatDialog,
         private messageDialogService: MessageDialogService,
+        private usersMasterService: UsersMasterService,
     ) {}
 
     /**
@@ -106,8 +109,6 @@ export class ListComponent implements AfterViewInit {
                 message: `${row.name}(${row.account})さんのアカウントを削除してもよろしいですか？削除したデータは元に戻せません。`,
             })
             .pipe(filter((result) => result === DialogButtons.OK))
-            .subscribe(() => {
-                alert('ok');
-            });
+            .subscribe(() => this.usersMasterService.deleteUser(row.id, row.account, row.name));
     }
 }
