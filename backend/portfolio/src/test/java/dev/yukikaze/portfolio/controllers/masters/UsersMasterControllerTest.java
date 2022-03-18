@@ -1,6 +1,7 @@
 package dev.yukikaze.portfolio.controllers.masters;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -17,6 +18,7 @@ import dev.yukikaze.portfolio.controllers.masters.UsersMasterController.DeleteRe
 import dev.yukikaze.portfolio.controllers.masters.UsersMasterController.ListResponse;
 import dev.yukikaze.portfolio.controllers.masters.UsersMasterController.ListUsers;
 import dev.yukikaze.portfolio.controllers.masters.UsersMasterController.RegistRequestBody;
+import dev.yukikaze.portfolio.controllers.masters.UsersMasterController.UpdatePasswordRequestBody;
 import dev.yukikaze.portfolio.controllers.masters.UsersMasterController.UpdateRequestBody;
 import dev.yukikaze.portfolio.entities.UsersEntity;
 import dev.yukikaze.portfolio.enums.UsersPermission;
@@ -148,6 +150,32 @@ public class UsersMasterControllerTest {
         // 例外の確認
         assertEquals(e.getStatus(), HttpStatus.INTERNAL_SERVER_ERROR);
         assertEquals(e.getReason(), "有効な管理者ユーザーが0人にならないようにしてください。");
+    }
+
+    @Test
+    @DisplayName("updatePassword メソッドのテスト")
+    public void updatePassword() throws Exception {
+        // 更新情報
+        Long targetId = 1L;
+        String password = "password";
+
+        // 更新前のデータの確認
+        String beforeUpdatedPassword = this.usersMapper.selectById(targetId).get().getPasswordHash();
+
+        // ユーザーデータの更新
+        this.usersMasterController.updatePassword(new UpdatePasswordRequestBody(targetId, password));
+
+        // 更新後のデータの確認
+        String afterUpdatedPassword = this.usersMapper.selectById(targetId).get().getPasswordHash();
+        assertNotEquals(beforeUpdatedPassword, afterUpdatedPassword);
+
+        // 存在しないユーザーデータの更新
+        ResponseStatusException e = assertThrows(ResponseStatusException.class, () -> this.usersMasterController
+                .updatePassword(new UpdatePasswordRequestBody(-1L, password)));
+
+        // 例外の確認
+        assertEquals(e.getStatus(), HttpStatus.INTERNAL_SERVER_ERROR);
+        assertEquals(e.getReason(), "更新対象のデータが見つかりませんでした。");
     }
 
     @Test

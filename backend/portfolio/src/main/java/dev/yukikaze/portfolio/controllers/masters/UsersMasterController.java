@@ -106,6 +106,27 @@ public class UsersMasterController {
     }
 
     /**
+     * パスワードの更新
+     *
+     * @param body パスワード情報
+     *
+     * @throws Exception エラーレスポンス
+     */
+    @PutMapping("password")
+    public void updatePassword(@RequestBody UpdatePasswordRequestBody body) throws Exception {
+        try {
+            this.usersService.updatePassword(body.id(), body.password());
+        } catch (Exception e) {
+            if (e instanceof ResponseStatusException) {
+                throw e;
+            }
+
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "パスワードの更新に失敗しました。");
+        }
+    }
+
+    /**
      * ユーザーの削除
      *
      * @param body 対象のユーザーID
@@ -154,6 +175,12 @@ public class UsersMasterController {
      */
     public record UpdateRequestBody(Long id, String account, String name, UsersPermission permission,
             Boolean isEnabled) {
+    }
+
+    /**
+     * updatePasswordメソッドのリクエストボディー
+     */
+    public record UpdatePasswordRequestBody(Long id, String password) {
     }
 
     /**

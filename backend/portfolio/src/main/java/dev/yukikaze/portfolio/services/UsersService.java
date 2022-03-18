@@ -121,6 +121,20 @@ public class UsersService {
     }
 
     /**
+     * ユーザーのパスワードを更新する
+     *
+     * @param id       ID
+     * @param password パスワード
+     */
+    public void updatePassword(Long id, String password) {
+        String hashedPassword = this.getHashedPassword(password);
+
+        if (!this.usersMapper.updateUserPassword(id, hashedPassword)) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "更新対象のデータが見つかりませんでした。");
+        }
+    }
+
+    /**
      * ユーザーデータを削除する
      *
      * @param id ID

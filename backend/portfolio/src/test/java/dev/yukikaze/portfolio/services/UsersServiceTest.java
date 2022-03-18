@@ -1,6 +1,7 @@
 package dev.yukikaze.portfolio.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
@@ -171,6 +172,31 @@ public class UsersServiceTest {
         // 例外の確認
         assertEquals(e.getStatus(), HttpStatus.INTERNAL_SERVER_ERROR);
         assertEquals(e.getReason(), "有効な管理者ユーザーが0人にならないようにしてください。");
+    }
+
+    @Test
+    @DisplayName("updatePassword メソッドのテスト")
+    public void updatePassword() {
+        // 更新前のデータの取得
+        String beforeUpdatePassword = this.usersService.getUserById(1L).getPasswordHash();
+
+        // パスワードの更新
+        this.usersService.updatePassword(1L, "password");
+
+        // 更新後のデータの取得
+        String afterUpdatePassword = this.usersService.getUserById(1L).getPasswordHash();
+
+        // データの確認
+        assertNotEquals("password", afterUpdatePassword);
+        assertNotEquals(beforeUpdatePassword, afterUpdatePassword);
+
+        // 存在しないユーザーの指定
+        ResponseStatusException e = assertThrows(ResponseStatusException.class,
+                () -> this.usersService.updatePassword(-1L, "password"));
+
+        // 例外の確認
+        assertEquals(e.getStatus(), HttpStatus.INTERNAL_SERVER_ERROR);
+        assertEquals(e.getReason(), "更新対象のデータが見つかりませんでした。");
     }
 
     @Test
