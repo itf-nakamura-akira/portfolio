@@ -12,7 +12,10 @@
             </mat-form-field>
             <mat-form-field class="password" appearance="fill">
                 <mat-label>パスワード</mat-label>
-                <input #password matInput formControlName="fcPassword" />
+                <input [type]="passwordHide ? 'password' : 'text'" #password matInput formControlName="fcPassword" />
+                <button type="button" mat-icon-button matSuffix (click)="passwordHide = !passwordHide">
+                    <mat-icon>{{ passwordHide ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
                 <mat-error *ngIf="fgLoginForm.get('fcPassword')?.invalid">必須入力です。</mat-error>
             </mat-form-field>
             <button type="submit" class="login-button" mat-flat-button color="primary" [disabled]="fgLoginForm.invalid">ログイン</button>

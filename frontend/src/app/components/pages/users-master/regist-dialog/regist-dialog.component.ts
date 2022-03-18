@@ -30,6 +30,11 @@ export class RegistDialogComponent {
     usersPermissionMapping = UsersPermissionMapping;
 
     /**
+     * パスワードの非表示ステータス
+     */
+    passwordHide = true;
+
+    /**
      * コンストラクター
      *
      * @param matDialogRef MatDialogRef

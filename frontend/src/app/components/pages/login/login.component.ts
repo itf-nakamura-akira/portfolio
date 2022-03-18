@@ -42,6 +42,11 @@ export class LoginComponent implements OnInit {
     );
 
     /**
+     * パスワードの非表示ステータス
+     */
+    passwordHide = true;
+
+    /**
      * コンストラクター
      *
      * @param matBottomSheet MatBottomSheet
