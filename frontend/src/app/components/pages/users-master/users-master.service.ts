@@ -144,6 +144,22 @@ export class UsersMasterService {
     }
 
     /**
+     * パスワードの更新
+     *
+     * @param id ID
+     * @param account アカウント
+     * @param name 表示名
+     * @param password パスワード
+     * @param successCallback 更新成功時コールバック
+     */
+    updatePassword(id: number, account: string, name: string, password: string, successCallback: () => void): void {
+        this.usersMasterHttpService.putPassword(id, password).subscribe(() => {
+            this.toastrService.success(`${name}(${account})さんのパスワードを再設定しました。`);
+            successCallback();
+        });
+    }
+
+    /**
      * ユーザーデータの削除
      *
      * @param id ID

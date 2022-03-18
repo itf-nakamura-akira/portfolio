@@ -58,9 +58,8 @@ export class ResetPasswordDialogComponent {
             return;
         }
 
-        // this.usersMasterService.registUser(
-        //     formGroup.get('fcPassword')?.value,
-        //     () => this.matDialogRef.close(),
-        // );
+        this.usersMasterService.updatePassword(this.data.id, this.data.account, this.data.name, formGroup.get('fcPassword')?.value, () =>
+            this.matDialogRef.close(),
+        );
     }
 }

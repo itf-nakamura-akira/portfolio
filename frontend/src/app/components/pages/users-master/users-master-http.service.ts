@@ -71,6 +71,19 @@ export class UsersMasterHttpService {
     }
 
     /**
+     * パスワードの更新
+     *
+     * @param id ID
+     * @param password パスワード
+     */
+    putPassword(id: number, password: string): Observable<void> {
+        return this.httpClient.put<void>('/masters/usersMaster/password', {
+            id,
+            password,
+        });
+    }
+
+    /**
      * ユーザーデータの削除
      *
      * @param id ID
