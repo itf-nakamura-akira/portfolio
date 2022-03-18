@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { keepMappingOrder } from 'src/app/enums/keepMappingOrder';
 import { UsersPermission, UsersPermissionMapping } from 'src/app/enums/usersPermission';
 import { UsersMasterService } from '../users-master.service';
 
@@ -28,6 +29,11 @@ export class RegistDialogComponent {
      * ユーザー権限マッピング
      */
     usersPermissionMapping = UsersPermissionMapping;
+
+    /**
+     * keyvaluePipeの順序を維持するための関数
+     */
+    keepMappingOrder = keepMappingOrder;
 
     /**
      * パスワードの非表示ステータス

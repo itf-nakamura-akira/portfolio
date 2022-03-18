@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs';
 import { OnDestroyEmitter } from 'src/app/components/on-destroy-emitter';
+import { keepMappingOrder } from 'src/app/enums/keepMappingOrder';
 import { UsersPermissionMapping } from 'src/app/enums/usersPermission';
 import { SearchParameter, UsersMasterService } from '../../users-master.service';
 
@@ -34,6 +35,11 @@ export class SearchComponent extends OnDestroyEmitter implements OnInit {
      * ユーザー権限マッピング
      */
     usersPermissionMapping = UsersPermissionMapping;
+
+    /**
+     * keyvaluePipeの順序を維持するための関数
+     */
+    keepMappingOrder = keepMappingOrder;
 
     /**
      * コンストラクター

@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { keepMappingOrder } from 'src/app/enums/keepMappingOrder';
 import { UsersPermission, UsersPermissionMapping } from 'src/app/enums/usersPermission';
 import { User } from '../users-master-http.service';
 import { UsersMasterService } from '../users-master.service';
@@ -28,6 +29,11 @@ export class UpdateDialogComponent implements OnInit {
      * ユーザー権限マッピング
      */
     usersPermissionMapping = UsersPermissionMapping;
+
+    /**
+     * keyvaluePipeの順序を維持するための関数
+     */
+    keepMappingOrder = keepMappingOrder;
 
     /**
      * コンストラクター

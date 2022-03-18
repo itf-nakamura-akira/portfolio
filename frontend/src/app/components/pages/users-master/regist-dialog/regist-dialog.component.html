@@ -25,7 +25,10 @@
         <mat-form-field appearance="fill">
             <mat-label>権限</mat-label>
             <mat-select formControlName="fcPermission">
-                <mat-option *ngFor="let usersPermission of usersPermissionMapping | keyvalue" [value]="usersPermission.key">
+                <mat-option
+                    *ngFor="let usersPermission of usersPermissionMapping | keyvalue: keepMappingOrder"
+                    [value]="usersPermission.key"
+                >
                     {{ usersPermission.value }}
                 </mat-option>
             </mat-select>
