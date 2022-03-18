@@ -11,6 +11,7 @@
             $column-width-name: 320px;
             $column-width-permission: 140px;
             $column-width-isEnabled: 120px;
+            $column-width-resetPassword: 180px;
 
             &account {
                 width: $column-width-account;
@@ -30,6 +31,10 @@
                 &.mat-cell .mat-icon {
                     margin-left: 30px;
                 }
+            }
+
+            &resetPassword {
+                width: $column-width-resetPassword;
             }
 
             &delete.mat-header-cell {

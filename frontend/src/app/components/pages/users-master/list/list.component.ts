@@ -7,6 +7,7 @@ import { filter } from 'rxjs';
 import { DialogButtons } from 'src/app/components/shared/message-dialog/message-dialog.component';
 import { UsersPermissionMapping } from 'src/app/enums/usersPermission';
 import { MessageDialogService } from 'src/app/services/message-dialog.service';
+import { ResetPasswordDialogComponent } from '../reset-password-dialog/reset-password-dialog.component';
 import { UpdateDialogComponent } from '../update-dialog/update-dialog.component';
 import { User } from '../users-master-http.service';
 import { UsersMasterService } from '../users-master.service';
@@ -45,7 +46,7 @@ export class ListComponent implements AfterViewInit {
     /**
      * 表示カラム
      */
-    readonly displayedColumns: string[] = ['account', 'name', 'permission', 'isEnabled', 'delete'];
+    readonly displayedColumns: string[] = ['account', 'name', 'permission', 'isEnabled', 'resetPassword', 'delete'];
 
     /**
      * MatTable用のデータソース
@@ -91,6 +92,24 @@ export class ListComponent implements AfterViewInit {
             viewContainerRef: this.viewContainerRef,
         };
         this.matDialog.open(UpdateDialogComponent, dialogConfig);
+    }
+
+    /**
+     * パスワードの再設定ボタンイベントハンドラー
+     *
+     * @param row クリックされた行
+     * @param e クリックイベントパラメーター
+     */
+    resetPasswordButtonClick(row: User, e: Event): void {
+        // 行クリックイベントへの伝搬キャンセル
+        e.stopPropagation();
+
+        const dialogConfig: MatDialogConfig<User> = {
+            data: row,
+            width: '400px',
+            viewContainerRef: this.viewContainerRef,
+        };
+        this.matDialog.open(ResetPasswordDialogComponent, dialogConfig);
     }
 
     /**

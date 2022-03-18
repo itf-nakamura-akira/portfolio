@@ -18,6 +18,7 @@ import { UpdateDialogComponent } from './update-dialog/update-dialog.component';
 import { UsersMasterRoutingModule } from './users-master-routing.module';
 import { UsersMasterComponent } from './users-master.component';
 import { RegistDialogComponent } from './regist-dialog/regist-dialog.component';
+import { ResetPasswordDialogComponent } from './reset-password-dialog/reset-password-dialog.component';
 
 @NgModule({
     declarations: [
@@ -28,6 +29,7 @@ import { RegistDialogComponent } from './regist-dialog/regist-dialog.component';
         HeaderComponent,
         RegistButtonComponent,
         RegistDialogComponent,
+        ResetPasswordDialogComponent,
     ],
     imports: [
         CommonModule,
