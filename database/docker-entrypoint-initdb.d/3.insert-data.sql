@@ -3,7 +3,10 @@ SET CHARACTER_SET_CONNECTION = utf8mb4;
 
 /*********** テストデータの作成 ***********/
 
--- ユーザーテーブル(パスワードはaccountと同じ)
+-- ユーザーテーブル
+-- BCrypt ハッシュ値 計算: http://www.tekboy.net/bcrypt-calculator
+-- テストデータ生成: https://tm-webtools.com/Tools/TestData
+-- ひらがな、ローマ字変換ツール: https://hogehoge.tk/nihongo/
 INSERT INTO users
     (account, password_hash, name, permission, is_enabled)
 VALUES
@@ -736,6 +739,26 @@ VALUES
     ('gunzi', '$2a$10$NHAwIiF5r7fXCjga7G.TsuEz8OLpCH.vM2z8OhNqusCJpGnqMJTgS'/* password */, '郡司 正博','User', true),
     ('kurosawa', '$2a$10$NHAwIiF5r7fXCjga7G.TsuEz8OLpCH.vM2z8OhNqusCJpGnqMJTgS'/* password */, '黒沢 寅吉','User', true)
 ;
--- BCrypt ハッシュ値 計算: http://www.tekboy.net/bcrypt-calculator
--- テストデータ生成: https://tm-webtools.com/Tools/TestData
--- ひらがな、ローマ字変換ツール: https://hogehoge.tk/nihongo/
+
+-- 労働時間テーブル
+DELIMITER //
+FOR i IN 0..730 -- 登録期間
+DO
+    SET @DATE=DATE_SUB(CURRENT_DATE(), INTERVAL i DAY);
+    SET @DAYOFWEEK=DAYOFWEEK(@DATE);
+    
+    IF @DAYOFWEEK != 1 AND @DAYOFWEEK != 7 THEN -- 土曜日と日曜日をスキップする
+        INSERT INTO working_hours
+            (users_id, work_day, start_time, end_time, memo)
+        SELECT
+            users.id,
+            @DATE,
+            DATE_FORMAT(@DATE, '%Y-%m-%d 09:00:00'),
+            DATE_ADD(DATE_FORMAT(@DATE, '%Y-%m-%d 18:00:00'), INTERVAL FLOOR(RAND() * 240) MINUTE),
+            NULL
+        FROM
+            users;
+    END IF;
+        
+END FOR;
+//

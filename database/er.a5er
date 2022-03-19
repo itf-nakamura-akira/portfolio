@@ -64,3 +64,47 @@ BkColor=$FFFFFF
 ModifiedDateTime=20220304151106
 Position="PORTFOLIO",500,250
 ZOrder=1
+
+[Entity]
+PName=working_hours
+LName=労働時間
+Comment=
+TableOption=
+Page=Portfolio
+Left=1900
+Top=800
+Field="ID","id","serial","NOT NULL",0,"","",$FFFFFFFF,""
+Field="ユーザーテーブルID","users_id","bigint unsigned","NOT NULL",,"","",$FFFFFFFF,""
+Field="出勤日","work_day","date","NOT NULL",,"","",$FFFFFFFF,""
+Field="開始時刻","start_time","datetime",,,"","",$FFFFFFFF,""
+Field="終了時刻","end_time","datetime",,,"","",$FFFFFFFF,""
+Field="備考","memo","text",,,"","",$FFFFFFFF,""
+Index==2,users_id ,work_day 
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20220319234510
+Position="Portfolio",1900,800
+ZOrder=2
+
+[Relation]
+Entity1=users
+Entity2=working_hours
+RelationType1=2
+RelationType2=3
+Fields1=id
+Fields2=users_id
+Cardinarity1=
+Cardinarity2=
+Position="PORTFOLIO",0,3781,4139,2437,R,R,""
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20220319231219
+LineMode=0
+Bar1=378
+Bar2=414
+Bar3=244
+TermPos1=R
+TermPos2=R
+ZOrder=3
