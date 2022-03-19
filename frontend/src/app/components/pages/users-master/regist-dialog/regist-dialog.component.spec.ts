@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -30,6 +31,7 @@ describe('RegistDialogComponent', () => {
                 MatInputModule,
                 MatSlideToggleModule,
                 MatSelectModule,
+                MatIconModule,
             ],
             providers: [{ provide: MatDialogRef, useValue: {} }, UsersMasterService],
         }).compileComponents();

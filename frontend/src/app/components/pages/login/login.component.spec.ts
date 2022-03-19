@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -24,6 +25,7 @@ describe('LoginComponent', () => {
                 MatInputModule,
                 MatBottomSheetModule,
                 MatCardModule,
+                MatIconModule,
             ],
             declarations: [LoginComponent],
         }).compileComponents();
