@@ -1,8 +1,10 @@
+import { Injectable } from '@angular/core';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 
 /**
  * MatPaginator の表示ラベルクラス(日本語)
  */
+@Injectable()
 export class MatPaginatorIntlJa extends MatPaginatorIntl {
     /**
      * 1ページあたりの表示件数
