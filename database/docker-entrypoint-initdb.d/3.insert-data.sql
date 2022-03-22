@@ -755,7 +755,7 @@ DO
             @DATE,
             DATE_FORMAT(@DATE, '%Y-%m-%d 09:00:00'),
             DATE_ADD(DATE_FORMAT(@DATE, '%Y-%m-%d 18:00:00'), INTERVAL FLOOR(RAND() * 240) MINUTE),
-            NULL
+            CONCAT('memo: ', DATE_FORMAT(@DATE, '%Y-%m-%d'))
         FROM
             users;
     END IF;

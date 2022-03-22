@@ -2,7 +2,7 @@
 SET CHARACTER_SET_CONNECTION = utf8mb4;
 
 -- Project Name : Portfolio
--- Date/Time    : 2022/03/19 23:45:19
+-- Date/Time    : 2022/03/23 2:00:07
 -- Author       : Akira Nakamura - ITFLLC
 -- RDBMS Type   : MySQL
 -- Application  : A5:SQL Mk-2
@@ -35,5 +35,5 @@ alter table users add unique users_IX1 (account) ;
 
 alter table working_hours
   add constraint working_hours_FK1 foreign key (users_id) references users(id)
-  on delete no action
-  on update no action;
+  on delete cascade
+  on update cascade;
