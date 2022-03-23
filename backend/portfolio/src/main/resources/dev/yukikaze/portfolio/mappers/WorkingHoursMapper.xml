@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.yukikaze.portfolio.mappers.WorkingHoursMapper">
+    <select id="select" resultType="WorkingHoursEntity">
+        SELECT
+            id,
+            users_id,
+            work_day,
+            start_time,
+            end_time,
+            memo
+        FROM
+            working_hours
+        WHERE
+            users_id = #{userId} AND
+            STR_TO_DATE(CONCAT(#{year}, '-', #{month}, '-', 1), '%Y-%c-%e') &lt;= work_day AND
+            work_day &lt; (STR_TO_DATE(CONCAT(#{year}, '-', #{month}, '-', 1), '%Y-%c-%e') + INTERVAL 1 MONTH)
+        ORDER BY
+            work_day;
+    </select>
+</mapper>
