@@ -17,6 +17,12 @@ const routes: Routes = [
                 canActivate: [AuthGuard],
             },
             {
+                path: 'inputWorkingHours',
+                loadChildren: () =>
+                    import('./components/pages/input-working-hours/input-working-hours.module').then((m) => m.InputWorkingHoursModule),
+                canActivate: [AuthGuard],
+            },
+            {
                 path: 'usersMaster',
                 loadChildren: () => import('./components/pages/users-master/users-master.module').then((m) => m.UsersMasterModule),
                 canActivate: [AuthGuard],
