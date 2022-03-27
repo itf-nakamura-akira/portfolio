@@ -1,5 +1,6 @@
 package dev.yukikaze.portfolio.services;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -31,8 +32,10 @@ public class WorkingHoursServiceTest {
     @Test
     @DisplayName("getWorkingHours メソッドのテスト")
     public void getWorkingHours() {
-        int targetYear = 2021;
-        int targetMonth = 12;
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, -6);
+        int targetYear = calendar.getWeekYear();
+        int targetMonth = calendar.get(Calendar.MONTH) + 1;
 
         // 労働時間データの取得
         List<WorkingHoursEntity> workingHoursList = this.workingHoursService.getWorkingHours(1L, targetYear,
