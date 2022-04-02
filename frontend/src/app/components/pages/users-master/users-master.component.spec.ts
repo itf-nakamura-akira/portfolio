@@ -10,6 +10,7 @@ import { MatTableModule } from '@angular/material/table';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ToastrModule } from 'ngx-toastr';
+import { PageModule } from '../../shared/page/page.module';
 import { HeaderComponent } from './header/header.component';
 import { RegistButtonComponent } from './header/regist-button/regist-button.component';
 import { SearchComponent } from './header/search/search.component';
@@ -37,6 +38,7 @@ describe('UsersMasterComponent', () => {
                 ToastrModule.forRoot({
                     progressBar: true,
                 }),
+                PageModule,
             ],
         }).compileComponents();
     });

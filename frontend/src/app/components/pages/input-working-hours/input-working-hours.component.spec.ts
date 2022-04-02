@@ -1,5 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActionComponent } from './header/action/action.component';
+import { HeaderComponent } from './header/header.component';
+import { SearchComponent } from './header/search/search.component';
 import { InputWorkingHoursComponent } from './input-working-hours.component';
+import { ListComponent } from './list/list.component';
 
 describe('InputWorkingHoursComponent', () => {
     let component: InputWorkingHoursComponent;
@@ -7,7 +11,7 @@ describe('InputWorkingHoursComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [InputWorkingHoursComponent],
+            declarations: [InputWorkingHoursComponent, HeaderComponent, ListComponent, SearchComponent, ActionComponent],
         }).compileComponents();
     });
 
