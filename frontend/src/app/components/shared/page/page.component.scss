@@ -1,0 +1,33 @@
+@use '../../../../styles.vars' as vars;
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - vars.$header-height);
+    overflow-y: auto;
+
+    .contents-header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        padding: vars.$main-contents-padding-y vars.$main-contents-padding-x 0 vars.$main-contents-padding-x;
+        background-color: map-get(vars.$mat-background, background);
+    }
+
+    .contents-main {
+        padding: 0 vars.$main-contents-padding-x;
+        background-color: map-get(vars.$mat-background, background);
+
+        &.extension {
+            flex-grow: 1;
+        }
+    }
+
+    .contents-footer {
+        position: sticky;
+        bottom: 0;
+        z-index: 1000;
+        padding: 0 vars.$main-contents-padding-x;
+        background-color: map-get(vars.$mat-background, background);
+    }
+}

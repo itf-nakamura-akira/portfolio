@@ -10,15 +10,16 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { PageModule } from '../../shared/page/page.module';
 import { HeaderComponent } from './header/header.component';
 import { RegistButtonComponent } from './header/regist-button/regist-button.component';
 import { SearchComponent } from './header/search/search.component';
 import { ListComponent } from './list/list.component';
+import { RegistDialogComponent } from './regist-dialog/regist-dialog.component';
+import { ResetPasswordDialogComponent } from './reset-password-dialog/reset-password-dialog.component';
 import { UpdateDialogComponent } from './update-dialog/update-dialog.component';
 import { UsersMasterRoutingModule } from './users-master-routing.module';
 import { UsersMasterComponent } from './users-master.component';
-import { RegistDialogComponent } from './regist-dialog/regist-dialog.component';
-import { ResetPasswordDialogComponent } from './reset-password-dialog/reset-password-dialog.component';
 
 @NgModule({
     declarations: [
@@ -44,6 +45,7 @@ import { ResetPasswordDialogComponent } from './reset-password-dialog/reset-pass
         MatDialogModule,
         MatButtonModule,
         UsersMasterRoutingModule,
+        PageModule,
     ],
 })
 export class UsersMasterModule {}

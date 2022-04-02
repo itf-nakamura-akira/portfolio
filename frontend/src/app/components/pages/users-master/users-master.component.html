@@ -1,3 +1,5 @@
-<app-header></app-header>
-<app-list *ngIf="usersData$ | async as usersData" [data]="usersData" [paginator]="paginator"></app-list>
-<mat-paginator #paginator></mat-paginator>
+<app-page>
+    <app-header header></app-header>
+    <app-list *ngIf="usersData$ | async as usersData" [data]="usersData" [paginator]="paginator"></app-list>
+    <mat-paginator #paginator footer></mat-paginator>
+</app-page>

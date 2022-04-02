@@ -1,7 +1,0 @@
-@use '../../../../styles.vars' as vars;
-
-:host {
-    display: flex;
-    flex-direction: column;
-    height: calc(100vh - vars.$header-height - vars.$main-contents-padding-y);
-}

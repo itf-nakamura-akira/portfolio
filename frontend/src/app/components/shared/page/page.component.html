@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="contents-header">
+        <ng-content select="[header]"></ng-content>
+    </div>
+    <div class="contents-main" [ngClass]="{ extension: mainHeightExtension }">
+        <ng-content></ng-content>
+    </div>
+    <div class="contents-footer">
+        <ng-content select="[footer]"></ng-content>
+    </div>
+</div>
