@@ -1,7 +1,7 @@
 @base_url = http://localhost:8080/api
 
 ### ユーザー認証
-POST {{ base_url }}/login/signIn HTTP/1.1
+POST {{ base_url }}/login HTTP/1.1
 content-type: application/json
 
 {
@@ -10,7 +10,7 @@ content-type: application/json
 }
 
 ### ログアウト
-POST {{ base_url }}/common/users/logout HTTP/1.1
+POST {{ base_url }}/common/app/logout HTTP/1.1
 content-type: application/json
 
 ### 認証済みか確認する
