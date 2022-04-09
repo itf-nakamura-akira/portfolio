@@ -1,11 +1,11 @@
 #!/usr/bin/bash
 
-DATABASE=construction_dx
+DATABASE=portfolio
 
-mysql --defaults-extra-file=./user.cnf -h construction-dx-db sys < ./docker-entrypoint-initdb.d/1.create-db.sql
-mysql --defaults-extra-file=./user.cnf -h construction-dx-db $DATABASE < ./docker-entrypoint-initdb.d/2.create-table.sql
-mysql --defaults-extra-file=./user.cnf -h construction-dx-db $DATABASE < ./docker-entrypoint-initdb.d/3.insert-data.sql
+mysql --defaults-extra-file=./user.cnf -h portfolio-db sys < ./docker-entrypoint-initdb.d/1.create-db.sql
+mysql --defaults-extra-file=./user.cnf -h portfolio-db $DATABASE < ./docker-entrypoint-initdb.d/2.create-table.sql
+mysql --defaults-extra-file=./user.cnf -h portfolio-db $DATABASE < ./docker-entrypoint-initdb.d/3.insert-data.sql
 
-mysql --defaults-extra-file=./user.cnf -h construction-dx-db-test sys < ./docker-entrypoint-initdb.d/1.create-db.sql
-mysql --defaults-extra-file=./user.cnf -h construction-dx-db-test $DATABASE < ./docker-entrypoint-initdb.d/2.create-table.sql
-mysql --defaults-extra-file=./user.cnf -h construction-dx-db-test $DATABASE < ./docker-entrypoint-initdb.d/3.insert-data.sql
+mysql --defaults-extra-file=./user.cnf -h portfolio-db-test sys < ./docker-entrypoint-initdb.d/1.create-db.sql
+mysql --defaults-extra-file=./user.cnf -h portfolio-db-test $DATABASE < ./docker-entrypoint-initdb.d/2.create-table.sql
+mysql --defaults-extra-file=./user.cnf -h portfolio-db-test $DATABASE < ./docker-entrypoint-initdb.d/3.insert-data.sql
